@@ -1,7 +1,7 @@
 .. _calm_win:
 
 -----------------------
-Calm: Windows 工作负载
+Calm: Windows 工作負載
 -----------------------
 
 *The estimated time to complete this lab is 60 minutes.*

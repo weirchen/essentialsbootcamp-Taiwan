@@ -1,38 +1,38 @@
 .. _calm_linux:
 
 ---------------------
-Calm: Linux 工作负载
+Calm: Linux 工作負載
 ---------------------
 
-*完成本实验的估计时间为60分钟。*
+*完成本實作的估計時間為60分鐘。*
 
-简介
+簡介
 ++++++++
 
-Nutanix Calm允许您跨私有云和公共云基础架构无缝选择、供应和管理业务应用程序。 Nutanix Calm提供应用程序生命周期，监视和修复，以管理您的异构基础架构，例如VM或裸机服务器。 Nutanix Calm支持多个平台，因此您可以使用单个自助服务和自动化界面来管理所有基础架构。
+Nutanix Calm允許您跨私有雲和公共雲基礎架構無縫選擇、供應和管理業務應用程式。 Nutanix Calm提供應用程式生命週期，監視和修復，以管理您的異構基礎架構，例如VM或裸機伺服器。 Nutanix Calm支援多個平臺，因此您可以使用單個自助服務和自動化介面來管理所有基礎架構。
 
-**在本实验中，您将通过构建和部署蓝图来探索Nutanix Calm的基础知识，该蓝图使用MySQL，nginix和HAProxy安装和配置多层Task Manager Web应用程序。**
+**在本實作中，您將通過構建和部署藍圖來探索Nutanix Calm的基礎知識，該藍圖使用MySQL，nginix和HAProxy安裝和配置多層Task Manager Web應用程式。**
 
-创建蓝图
+創建藍圖
 ++++++++++++++++++++
 
-蓝图是使用Nutanix Calm建模的每个应用程序的框架。 蓝图是模板，描述了在已创建的服务和应用程序上置备，配置和执行任务所需的所有步骤。 您可以创建一个代表您的应用程序体系结构的蓝图，然后重复运行该蓝图以创建实例，配置和启动您的应用程序。 蓝图还定义了应用程序及其底层基础结构的生命周期，从创建应用程序到对蓝图执行的操作直到应用程序终止为止。
+藍圖是使用Nutanix Calm建模的每個應用程式的框架。 藍圖是範本，描述了在已創建的服務和應用程式上置備，配置和執行任務所需的所有步驟。 您可以創建一個代表您的應用程式體系結構的藍圖，然後重複運行該藍圖以創建實例，配置和啟動您的應用程式。 藍圖還定義了應用程式及其底層基礎結構的生命週期，從創建應用程式到對藍圖執行的操作直到應用程式終止為止。
 
-您可以使用蓝图对各种复杂的应用程序进行建模。 从简单地配置单个虚拟机到配置和管理多节点，多层应用程序。
+您可以使用藍圖對各種複雜的應用程式進行建模。 從簡單地配置單個虛擬機器到配置和管理多節點，多層應用程式。
 
-#. 在 **Prism Central**, 选择 :fa:`bars` **> Services > Calm**.
+#. 在 **Prism Central**, 選擇 :fa:`bars` **> Services > Calm**.
 
    .. figure:: images/1.png
 
-#. 在左手工具栏选择 |blueprints| **Blueprints** 查看和管理 Calm 蓝图。
+#. 在左手工具列選擇 |blueprints| **Blueprints** 查看和管理 Calm 藍圖。
 
    .. note::
 
-     将鼠标悬停在图标上将显示其标题。
+     將滑鼠懸停在圖示上將顯示其標題。
 
-#. 单击 **+ Create Blueprint > Multi VM/Pod Blueprint**.
+#. 按一下 **+ Create Blueprint > Multi VM/Pod Blueprint**.
 
-#. 填写以下字段：
+#. 填寫以下欄位：
 
    - **Name** - *Initials*-CalmLinuxIntro
    - **Description** - [Task Manager Application](\http://@@{HAProxy.address}@@/)
@@ -40,22 +40,22 @@ Nutanix Calm允许您跨私有云和公共云基础架构无缝选择、供应�
 
    .. figure:: images/2.png
 
-#. 单击 **Proceed** 打开蓝图编辑器
+#. 按一下 **Proceed** 打開藍圖編輯器
 
-   蓝图编辑器提供了各种组件的图形表示，使您可以在环境中可视化和配置组件及其依赖性。
+   藍圖編輯器提供了各種元件的圖形表示，使您可以在環境中視覺化和配置元件及其相依性性。
 
-创建凭证
+創建憑證
 ++++++++++++++++++++
 
-首先，您将创建一个证书，该证书将用于对最终将部署的CentOS VM进行Calm身份验证。 凭证对于每个蓝图都是唯一的，出于安全目的， **不会** 将其作为蓝图的一部分导出。 每个蓝图至少需要1个凭证。
+首先，您將創建一個證書，該證書將用於對最終將部署的CentOS VM進行Calm身份驗證。 憑證對於每個藍圖都是唯一的，出於安全目的， **不會** 將其作為藍圖的一部分匯出。 每個藍圖至少需要1個憑證。
 
-本练习使用“通用云” CentOS映像。 这是多个流行的Linux发行版的通用选项，这些发行版轻巧，支持基于Cloud-Init的配置并利用 `SSH keypair authentication <https://www.ssh.com/ssh/public-key-authentication>`_ 而不是密码。 基于密钥对的身份验证在所有公共云环境中都很普遍。
+本練習使用“通用雲” CentOS映射。 這是多個流行的Linux發行版本的通用選項，這些發行版本輕巧，支援基於Cloud-Init的配置並利用 `SSH keypair authentication <https://www.ssh.com/ssh/public-key-authentication>`_ 而不是密碼。 基於金鑰對的身份驗證在所有公共雲環境中都很普遍。
 
-#. 单击 **Credentials**.
+#. 按一下 **Credentials**.
 
    .. figure:: images/3.png
 
-#. 单击 **Credentials** :fa:`plus-circle` 并填写以下字段：
+#. 按一下 **Credentials** :fa:`plus-circle` 並填寫以下欄位：
 
    - **Credential Name** - CENTOS
    - **Username** - centos
@@ -94,19 +94,19 @@ Nutanix Calm允许您跨私有云和公共云基础架构无缝选择、供应�
 
    .. figure:: images/4.png
 
-#. 单击 **Save**, 然后 **Back**.
+#. 按一下 **Save**, 然後 **Back**.
 
-定义变量
+定義變數
 ++++++++++++++++++
 
-变量允许蓝图的可扩展性，这意味着单个蓝图可以根据其变量的配置用于多种用途和环境。
-变量可以是保存为蓝图一部分的静态值，也可以在**Runtime** （启动蓝图）时指定。变量特定于给定的**Application Profile**，这是将在其上部署蓝图的平台。例如，能够同时部署到AHV和AWS的蓝图将具有2个应用程序配置文件。每个配置文件可以具有单独的变量和VM配置。
+變數允許藍圖的可擴展性，這意味著單個藍圖可以根據其變數的配置用於多種用途和環境。
+變數可以是保存為藍圖一部分的靜態值，也可以在**Runtime** （啟動藍圖）時指定。變數特定於給定的**Application Profile**，這是將在其上部署藍圖的平臺。例如，能夠同時部署到AHV和AWS的藍圖將具有2個應用程式設定檔。每個設定檔可以具有單獨的變數和VM配置。
 
-默认情况下，变量存储为 ** String **，并且在“配置”窗格中可见。将变量设置为 **Secret**将掩盖该值，并且非常适合诸如密码之类的变量。除了String和Secret选项外，还有Integer，Multi-line String，Date, Time, and Date Time **Data Types** 和更高级的 **“输入类型” **，但是这些内容不在此范围之内。实验室。
+預設情況下，變數儲存為 ** String **，並且在“配置”窗格中可見。將變數設置為 **Secret**將掩蓋該值，並且非常適合諸如密碼之類的變數。除了String和Secret選項外，還有Integer，Multi-line String，Date, Time, and Date Time **Data Types** 和更高級的 **“輸入類型” **，但是這些內容不在此範圍之內。實作室。
 
-可以在使用 ** @@ {variable_name} @@ **结构针对对象执行的脚本中使用变量。 Calm将展开并使用适当的值替换该变量，然后再发送到VM。
+可以在使用 ** @@ {variable_name} @@ **結構針對物件執行的腳本中使用變數。 Calm將展開並使用適當的值替換該變數，然後再發送到VM。
 
-#. 在Blueprint Editor右边的 **Configuration Pane** ，在 **Variables**下面, 添加下面变量 ( **Runtime** 通过切换 **Running Man** 标识到蓝色来指定):
+#. 在Blueprint Editor右邊的 **Configuration Pane** ，在 **Variables**下面, 添加下面變數 ( **Runtime** 通過切換 **Running Man** 標識到藍色來指定):
 
    +------------------------+-------------------------------+------------+-------------+
    | **Variable Name**      | **Data Type** | **Value**     | **Secret** | **Runtime** |
@@ -122,14 +122,14 @@ Nutanix Calm允许您跨私有云和公共云基础架构无缝选择、供应�
 
    .. figure:: images/5.png
 
-#. 单击 **Save**.
+#. 按一下 **Save**.
 
-添加可下载的图像
+添加可下載的映像檔
 +++++++++++++++++++++++++++
 
-可以基于磁盘映像部署AHV中的VM。 使用Calm，您可以通过URI选择可下载图像。 在应用程序部署期间，Prism Central将自动下载并创建指定的映像。 如果群集上已经存在具有相同URI的图像，它将跳过下载并改用本地图像。
+可以基於映像檔部署AHV中的VM。 使用Calm，您可以通過URI選擇可下載映像檔。 在應用程式部署期間，Prism Central將自動下載並創建指定的映像檔。 如果群集上已經存在具有相同URI的映像檔，它將跳過下載並改用本地映像檔。
 
-#. 在顶部工具栏中，单击 **Configuration > Downloadable Image Configuration** :fa:`plus-circle` 并填写以下字段：
+#. 在頂部工具列中，按一下 **Configuration > Downloadable Image Configuration** :fa:`plus-circle` 並填寫以下欄位：
 
    - **Package Name** - CentOS_7_Cloud
    - **Description** - CentOS 7 Cloud Image
@@ -142,37 +142,37 @@ Nutanix Calm允许您跨私有云和公共云基础架构无缝选择、供应�
 
    .. note::
 
-      此通用云镜像（Generic Cloud image）与大多数Nutanix预播应用程序蓝图使用的映像相同。
+      此通用雲映像檔（Generic Cloud image）與大多數Nutanix預播應用程式藍圖使用的映像檔相同。
 
    .. figure:: images/6.png
 
-#. 单击 **Save**, 之后 **Back**.
+#. 按一下 **Save**, 之後 **Back**.
 
-创建Service
+創建Service
 +++++++++++++++++
 
-Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix Calm进行配置和配置。
+Services 是虛擬機器實例，現有電腦或裸機，您可以使用Nutanix Calm進行配置和配置。
 
-在本练习中，您将创建组成应用程序的数据库，Web服务器和负载平衡器服务。
+在本練習中，您將創建組成應用程式的資料庫，Web伺服器和負載平衡器服務。
 
-创建数据库服务
+創建資料庫服務
 .............................
 
-#. 在 **Application Overview > Services**, 单击 :fa:`plus-circle` 增加新的 Service.
+#. 在 **Application Overview > Services**, 按一下 :fa:`plus-circle` 增加新的 Service.
 
-   默认情况下，“应用程序概述”位于蓝图编辑器的右下角，用于创建和管理蓝图层，例如服务，应用程序配置文件和操作。
+   預設情況下，“應用程式概述”位於藍圖編輯器的右下角，用於創建和管理藍圖層，例如服務，應用程式設定檔和操作。
 
    .. figure:: images/7.png
 
-   注意 **Service1** 出现在 **Workspace** 并且 **Configuration Pane** 反映所选服务的配置。
+   注意 **Service1** 出現在 **Workspace** 並且 **Configuration Pane** 反映所選服務的配置。
 
-#. 填写以下字段：
+#. 填寫以下欄位：
 
    - **Service Name** - MySQL
    - **Name** - MySQLAHV
 
    .. note::
-      这定义了Calm中基底的名称。 名称只能包含字母数字字符，空格和下划线。
+      這定義了Calm中基底的名稱。 名稱只能包含字母數位字元，空格和底線。
 
    - **Cloud** - Nutanix
    - **OS** - Linux
@@ -180,7 +180,7 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
 
    .. note::
 
-     Runtime是将使用您先前提供的变量 **User_initials** ，用于在VM名称前加上首字母缩写。 它还将使用内置宏来提供数组索引（用于横向扩展服务）和时间戳。
+     Runtime是將使用您先前提供的變數 **User_initials** ，用於在VM名稱前加上首字母縮寫。 它還將使用內置巨集來提供陣列索引（用於橫向擴展服務）和時間戳記。
 
    - **Image** - CentOS_7_Cloud
    - **Device Type** - Disk
@@ -205,35 +205,35 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
 
        .. note::
 
-         使用SSH私钥凭据时，Calm可以将该私钥解码为匹配的公钥，并通过@@ {Credential_Name.public_key} @@宏访问已解码的值。 然后利用Cloud-Init将SSH公钥值填充为授权密钥，从而允许使用相应的私钥向主机进行身份验证。
+         使用SSH私密金鑰憑據時，Calm可以將該私密金鑰解碼為匹配的公開金鑰，並通過@@ {Credential_Name.public_key} @@巨集存取已解碼的值。 然後利用Cloud-Init將SSH公開金鑰值填充為授權金鑰，從而允許使用相應的私密金鑰向主機進行身份驗證。
 
-   - 选择 **Network Adapters (NICs)**下面的 :fa:`plus-circle` 
+   - 選擇 **Network Adapters (NICs)**下面的 :fa:`plus-circle` 
    - **NIC 1** - Primary
    - **Credential** - CENTOS
 
-#. 单击 **Save**.
+#. 按一下 **Save**.
 
    .. note::
 
-    如果在保存蓝图后出现错误或警告，请将鼠标悬停在顶部工具栏中的图标上，以查看问题列表。 解决所有问题，然后再次**保存**蓝图。
+    如果在保存藍圖後出現錯誤或警告，請將滑鼠懸停在頂部工具列中的圖示上，以查看問題列表。 解決所有問題，然後再次**保存**藍圖。
 
      .. figure:: images/8.png
 
-   现在，您已经完成了与服务关联的VM的部署详细信息，下一步是告诉Calm如何在VM上安装应用程序。
+   現在，您已經完成了與服務關聯的VM的部署詳細資訊，下一步是告訴Calm如何在VM上安裝應用程式。
 
-#. 在Workspace窗格中选择**MySQL**服务图标后，滚动到**Configuration Panel**的顶部，然后选择**Package**选项卡。
+#. 在Workspace窗格中選擇**MySQL**服務圖示後，滾動到**Configuration Panel**的頂部，然後選擇**Package**選項卡。
 
-    软件包是在服务上安装的配置和应用程序，通常是通过在服务VM上执行脚本来完成的。
+    套裝軟體是在服務上安裝的配置和應用程式，通常是通過在服務VM上執行腳本來完成的。
 
-#. 填写 **MySQL_PACKAGE** 作为 **Package Name** 并点击 **Configure install**.
+#. 填寫 **MySQL_PACKAGE** 作為 **Package Name** 並點擊 **Configure install**.
 
    - **Package Name** - MYSQL_PACKAGE
 
    .. figure:: images/9.png
 
-   请注意，在Workspace窗格MySQL服务上出现的**Package install**字段。
+   請注意，在Workspace窗格MySQL服務上出現的**Package install**欄位。
 
-#. 选择 **+ Task**, 并填写以下字段 **Configuration Panel** 以定义Calm将在MySQL Service VM上远程执行的脚本：
+#. 選擇 **+ Task**, 並填寫以下欄位 **Configuration Panel** 以定義Calm將在MySQL Service VM上遠端執行的腳本：
 
    - **Task Name** - Install_sql
    - **Type** - Execute
@@ -278,15 +278,15 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
    .. figure:: images/10.png
 
    .. note::
-      您可以单击脚本字段上的** Pop Out **图标以获得更大的窗口，以查看/编辑脚本。
+      您可以按一下腳本欄位上的** Pop Out **圖示以獲得更大的視窗，以查看/編輯腳本。
 
-   查看脚本，您将看到该软件包将安装MySQL，配置凭据并根据练习中指定的变量创建数据库。
+   查看腳本，您將看到該套裝軟體將安裝MySQL，配置憑據並根據練習中指定的變數創建資料庫。
 
-#.  再次在“工作区”窗格中选择 **MySQL**服务图标，然后在 **Configuration Panel**中选择**Package**选项卡。
+#.  再次在“工作區”窗格中選擇 **MySQL**服務圖示，然後在 **Configuration Panel**中選擇**Package**選項卡。
 
-#.  单击 **Configure uninstall**.
+#.  按一下 **Configure uninstall**.
 
-#.  单击 **+ Task**, 并填写以下字段 **Configuration Panel**:
+#.  按一下 **+ Task**, 並填寫以下欄位 **Configuration Panel**:
 
    - **Task Name** - Uninstall_sql
    - **Type** - Execute
@@ -302,18 +302,18 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
    .. figure:: images/11.png
 
    .. note::
-      卸载脚本可用于删除程序包，更新网络服务（如DHCP和DNS），从Active Directory中删除条目等。此简单示例未使用该脚本。
+      卸載腳本可用於刪除套裝程式，更新網路服務（如DHCP和DNS），從Active Directory中刪除條目等。此簡單示例未使用該腳本。
 
-#. 单击 **Save**. 如果存在验证问题（例如缺少字段或不可接受的字符），系统将提示您特定的错误。
+#. 按一下 **Save**. 如果存在驗證問題（例如缺少欄位或不可接受的字元），系統將提示您特定的錯誤。
 
-创建Web服务器服务
+創建Web伺服器服務
 ................................
 
-现在，您将按照类似的步骤定义Web服务器服务。
+現在，您將按照類似的步驟定義Web伺服器服務。
 
-#. 在 **Application Overview > Services**, 添加其他服务。
+#. 在 **Application Overview > Services**, 添加其他服務。
 
-#. 选择新服务，然后在“**Configuration Panel**中填写以下**VM** 字段： 
+#. 選擇新服務，然後在“**Configuration Panel**中填寫以下**VM** 欄位： 
 
    - **Service Name** - WebServer
    - **Name** - WebServerAHV
@@ -323,11 +323,11 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
    - **Image** - CentOS_7_Cloud
    - **Device Type** - Disk
    - **Device Bus** - SCSI
-   - 选择 **Bootable**
+   - 選擇 **Bootable**
    - **vCPUs** - 2
    - **Cores per vCPU** - 1
    - **Memory (GiB)** - 4
-   - 选择 **Guest Customization**
+   - 選擇 **Guest Customization**
 
      - **Type** - Cloud-init
      - **Script** -
@@ -341,17 +341,17 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
                - @@{CENTOS.public_key}@@
              sudo: ['ALL=(ALL) NOPASSWD:ALL']
 
-   - 选择**Network Adapters (NICs)**下面的 :fa:`plus-circle`  
+   - 選擇**Network Adapters (NICs)**下面的 :fa:`plus-circle`  
    - **NIC 1** - Primary
    - **Credential** - CENTOS
 
-#. 选择 **Package** 选项卡。
+#. 選擇 **Package** 選項卡。
 
-#. 填写 **Package Name** 并单击 **Configure install**.
+#. 填寫 **Package Name** 並按一下 **Configure install**.
 
    - **Package Name** - WebServer_PACKAGE
 
-#. 选择 **+ Task**, 并填写以下字段 **Configuration Panel**:
+#. 選擇 **+ Task**, 並填寫以下欄位 **Configuration Panel**:
 
    - **Name Task** - Install_WebServer
    - **Type** - Execute
@@ -424,12 +424,12 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
        sudo chmod -R 777 /var/www/laravel/
        sudo systemctl restart nginx
 
-   此脚本将安装PHP和Nginx来创建Web服务器，然后创建基于Laravel的Web应用程序。
-    然后，它配置Web应用程序设置，包括使用通过** @@ {MySQL.address} @@ **宏访问的MySQL IP地址更新** DB_HOST **。
+   此腳本將安裝PHP和Nginx來創建Web伺服器，然後創建基於Laravel的Web應用程式。
+    然後，它配置Web應用程式設置，包括使用通過** @@ {MySQL.address} @@ **巨集存取的MySQL IP位址更新** DB_HOST **。
 
-#. 选择 **Package** 选项卡并单击 **Configure uninstall**.
+#. 選擇 **Package** 選項卡並按一下 **Configure uninstall**.
 
-#. 选择 **+ Task**, 在 **Configuration Panel**填写以下字段:
+#. 選擇 **+ Task**, 在 **Configuration Panel**填寫以下欄位:
 
    - **Name Task** - Uninstall_WebServer
    - **Type** - Execute
@@ -445,32 +445,32 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
        sudo rm -rf /var/www/laravel
        sudo yum erase -y nginx
 
-   对于许多应用程序，通常需要扩展给定的服务（例如Web层）以处理更多并发用户。 借助Calm，可以轻松地部署包含给定服务的多个副本的阵列。
+   對於許多應用程式，通常需要擴展給定的服務（例如Web層）以處理更多併發用戶。 借助Calm，可以輕鬆地部署包含給定服務的多個副本的陣列。
 
-#. 在Workspace窗格中选择 **WebServer**服务图标后，滚动到 **Configuration Panel**的顶部，然后选择 **Service**选项卡。
+#. 在Workspace窗格中選擇 **WebServer**服務圖示後，滾動到 **Configuration Panel**的頂部，然後選擇 **Service**選項卡。
 
-#. 在 **Deployment Config > Number of Replicas**, 增加 **Min** 的值从1到2 和 **Max** 的值从 1 到 4.
+#. 在 **Deployment Config > Number of Replicas**, 增加 **Min** 的值從1到2 和 **Max** 的值從 1 到 4.
 
    .. figure:: images/12.png
 
-   此项更改将为应用程序的每次部署至少提供2个WebServer VM，并使阵列最多可以增长到4个WebServer VM。
+   此項更改將為應用程式的每次部署至少提供2個WebServer VM，並使陣列最多可以增長到4個WebServer VM。
 
    .. note::
 
-     伸缩应用程序将需要其他脚本，以便应用程序了解如何利用其他VM。
+     伸縮應用程式將需要其他腳本，以便應用程式瞭解如何利用其他VM。
 
-#. 点击 **Save**.
+#. 點擊 **Save**.
 
 .. _haproxyinstall:
 
-创建负载均衡服务
+創建負載均衡服務
 ..................................
 
-为了利用横向扩展Web层，您的应用程序需要能够在多个Web服务器VM之间平衡连接的负载。 HAProxy是一个免费的开源TCP / HTTP负载平衡器，用于在多个服务器之间分配工作负载。 从小型，简单的部署到大型Web规模的环境（例如GitHub，Instagram和Twitter），都可以使用它。
+為了利用橫向擴展Web層，您的應用程式需要能夠在多個Web伺服器VM之間平衡連接的負載。 HAProxy是一個免費的開源TCP / HTTP負載平衡器，用於在多個伺服器之間分配工作負載。 從小型，簡單的部署到大型Web規模的環境（例如GitHub，Instagram和Twitter），都可以使用它。
 
-#. 在 **Application Overview > Services**, 添加另一个服务。
+#. 在 **Application Overview > Services**, 添加另一個服務。
 
-#. 选择一个新服务并在 **Configuration Panel**填写 **VM** 字段:
+#. 選擇一個新服務並在 **Configuration Panel**填寫 **VM** 欄位:
 
    - **Service Name** - HAProxy
    - **Name** - HAProxyAHV
@@ -498,17 +498,17 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
                - @@{CENTOS.public_key}@@
              sudo: ['ALL=(ALL) NOPASSWD:ALL']
 
-   - 选择 :fa:`plus-circle` under **Network Adapters (NICs)**
+   - 選擇 :fa:`plus-circle` under **Network Adapters (NICs)**
    - **NIC 1** - Primary
    - **Credential** - CENTOS
 
-#. 选择 **Package** 选项卡。
+#. 選擇 **Package** 選項卡。
 
-#. 填写 **Package Name** 并选择 **Configure install**.
+#. 填寫 **Package Name** 並選擇 **Configure install**.
 
    - **Package Name** - HAProxy_PACKAGE
 
-#. 选择 **+ Task**, 填写以下字段 **Configuration Panel**:
+#. 選擇 **+ Task**, 填寫以下欄位 **Configuration Panel**:
 
    - **Name Task** - Install_HAProxy
    - **Type** - Execute
@@ -568,11 +568,11 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
        sudo systemctl enable haproxy
        sudo systemctl restart haproxy
 
-   注意在以上脚本中 @@{WebServer.address}@@ 宏的使用。 该宏返回该服务内VM的所有IP的逗号分隔列表。 然后，脚本使用 `tr <https://www.geeksforgeeks.org/tr-command-unixlinux-examples/>`_ 命令用回车符替换逗号。 结果是一个数组， **$hosts**, 包含所有WebServer IP地址的字符串。 然后将这些地址分别添加到 **HAProxy** 配置文件。
+   注意在以上腳本中 @@{WebServer.address}@@ 巨集的使用。 該巨集返回該服務內VM的所有IP的逗號分隔列表。 然後，腳本使用 `tr <https://www.geeksforgeeks.org/tr-command-unixlinux-examples/>`_ 命令用回車符替換逗號。 結果是一個陣列， **$hosts**, 包含所有WebServer IP位址的字串。 然後將這些位址分別添加到 **HAProxy** 設定檔。
 
-#. 选择 **Package** 选项卡并点击 **Configure uninstall**.
+#. 選擇 **Package** 選項卡並點擊 **Configure uninstall**.
 
-#. 选择 **+ Task**, 并填写以下字段 **Configuration Panel**:
+#. 選擇 **+ Task**, 並填寫以下欄位 **Configuration Panel**:
 
    - **Name Task** - Uninstall_HAProxy
    - **Type** - Execute
@@ -588,102 +588,102 @@ Services 是虚拟机实例，现有计算机或裸机，您可以使用Nutanix 
        sudo
        yum -y erase haproxy
 
-#. 点击 **Save**.
+#. 點擊 **Save**.
 
-添加依赖项
+添加相依性項
 +++++++++++++++++++
 
-由于我们的应用程序将需要数据库在Web服务器启动之前运行，因此我们的蓝图需要依赖项来强制执行此排序。 有两种方法可以完成此操作，其中一种您已经完成但没有意识到。
+由於我們的應用程式將需要資料庫在Web伺服器啟動之前運行，因此我們的藍圖需要相依性項來強制執行此排序。 有兩種方法可以完成此操作，其中一種您已經完成但沒有意識到。
 
-#. 在 **Application Overview > Application Profile** 部分, 扩展 **Default** 应用程序配置文件，然后单击 **Create** 动作。
+#. 在 **Application Overview > Application Profile** 部分, 擴展 **Default** 應用程式設定檔，然後按一下 **Create** 動作。
 
    .. figure:: images/13.png
 
-   注意** Orange Orchestration Edge **从** MySQL Start **任务转到** WebServer Package Install **任务。 由于“ WebServer Package Install”任务中的** @@ {MySQL.address} @@ **宏引用，Calm自动创建了此边缘。 由于系统在继续执行WebServer安装任务之前需要知道MySQL服务的IP地址，因此Calm会为您智能地创建业务流程边缘。 这要求在继续进行WebServer安装任务之前启动MySQL服务。
+   注意** Orange Orchestration Edge **從** MySQL Start **任務轉到** WebServer Package Install **任務。 由於“ WebServer Package Install”任務中的** @@ {MySQL.address} @@ **巨集引用，Calm自動創建了此邊線。 由於系統在繼續執行WebServer安裝任務之前需要知道MySQL服務的IP位址，因此Calm會為您智慧地創建業務流程邊線。 這要求在繼續進行WebServer安裝任務之前啟動MySQL服務。
 
-#. 返回 **HAProxy Package Install** 任务，为什么在WebServer和HAProxy服务之间自动创建业务流程边缘？
+#. 返回 **HAProxy Package Install** 任務，為什麼在WebServer和HAProxy服務之間自動創建業務流程邊線？ 
 
-#. 接下来，选择 **Stop** 配置文件操作。
+#. 接下來，選擇 **Stop** 設定檔操作。
 
-   请注意，停止应用程序时，服务之间的编排边缘不足。 为什么向应用程序内的所有服务发出关闭命令会同时导致问题？
+   請注意，停止應用程式時，服務之間的編排邊線不足。 為什麼向應用程式內的所有服務發出關閉命令會同時導致問題？
 
-#. 单击每个Profile Action以记录当前编排边缘的存在（或不存在）。
+#. 按一下每個Profile Action以記錄當前編排邊線的存在（或不存在）。
 
    .. figure:: images/14.png
 
-   要解决此问题，您将手动定义服务之间的依赖关系。
+   要解決此問題，您將手動定義服務之間的相依性關係。
 
-#. 选择 **WebServer** 服务，然后单击“服务”图标上方显示的 **Create Dependency**图标，然后单击 **MySQL**服务。
+#. 選擇 **WebServer** 服務，然後按一下“服務”圖示上方顯示的 **Create Dependency**圖示，然後按一下 **MySQL**服務。
 
    .. figure:: images/15.png
 
-#. 这表示 **WebServer**服务依赖于MySQL服务，这意味着 **MySQL**服务将在W**MySQL**服务之前启动，然后在 **MySQL**服务之后停止。
+#. 這表示 **WebServer**服務相依性於MySQL服務，這意味著 **MySQL**服務將在W**MySQL**服務之前啟動，然後在 **MySQL**服務之後停止。
 
-#. 现在，为 **HAProxy**服务创建依赖项以依赖 **WebServer**服务。
+#. 現在，為 **HAProxy**服務創建相依性項以相依性 **WebServer**服務。
 
-#. 点击 **Save**.
+#. 點擊 **Save**.
 
-#. 重新访问概要文件操作并确认边缘现在可以正确反映服务之间的依赖关系，如下所示：
+#. 重新存取概要檔操作並確認邊線現在可以正確反映服務之間的相依性關係，如下所示：
 
    .. figure:: images/16.png
 
-   绘制白色的依赖关系箭头将使Calm为所有“系统定义的配置文件操作”（创建，开始，重新启动，停止，删除和软删除）创建编排边缘。
+   繪製白色的相依性關係箭頭將使Calm為所有“系統定義的設定檔操作”（創建，開始，重新啟動，停止，刪除和軟刪除）創建編排邊線。
 
-部署和管理应用
+部署和管理應用
 +++++++++++++
 
-#. 在蓝图编辑器的上方工具栏中，单击 **Launch**.
+#. 在藍圖編輯器的上方工具列中，按一下 **Launch**.
 
-#. 指定唯一 **Application Name** (e.g. *Initials*\ -CalmLinuxIntro1) 和你的 **User_initials** 为VM命名的Runtime变量值。
+#. 指定唯一 **Application Name** (e.g. *Initials*\ -CalmLinuxIntro1) 和你的 **User_initials** 為VM命名的Runtime變數值。
 
-#. 点击 **Create**.
+#. 點擊 **Create**.
 
-    **Audit** 选项卡可用于监视应用程序的部署。
+    **Audit** 選項卡可用于監視應用程式的部署。
 
-   为什么在下载磁盘映像后所有基于CentOS的服务都不同时部署？
+   為什麼在下載磁片映射後所有基於CentOS的服務都不同時部署？
 
-#. 一旦应用进入 **Running** 状态, 导航到**Services**选项卡，然后选择**HAProxy**服务以确定您的负载均衡器的IP地址。
+#. 一旦應用進入 **Running** 狀態, 導航到**Services**選項卡，然後選擇**HAProxy**服務以確定您的負載等化器的IP位址。
 
-#. 在新的浏览器标签或窗口中，导航到 \http://<HAProxy-IP>, 并验证您的任务管理器应用程序是否正常运行。
+#. 在新的瀏覽器標籤或視窗中，導航到 \http://<HAProxy-IP>, 並驗證您的工作管理員應用程式是否正常運行。
 
    .. note::
 
-    您也可以单击“应用程序描述”中的链接。
+    您也可以按一下“應用程式描述”中的連結。
 
    .. figure:: images/17.png
 
-概要总结
+概要總結
 +++++++++
 
-您应该了解 ** Nutanix Calm **的关键要点是什么？
+您應該瞭解 ** Nutanix Calm **的關鍵要點是什麼？
 
--Nutanix Calm作为Prism的本机组件，建立在该平台上并发扬光大。 Acropolis提供的简单性使Calm专注于应用程序，而不是试图掩盖基础架构管理的复杂性。
+-Nutanix Calm作為Prism的本機元件，建立在該平臺上並發揚光大。 Acropolis提供的簡單性使Calm專注于應用程式，而不是試圖掩蓋基礎架構管理的複雜性。
 
--Calm蓝图易于使用。在60分钟内，您从零开始进行了完整的基础架构堆栈部署。由于Calm使用标准工具（bash，PowerShell，Python等）进行配置，因此无需学习任何新语言，因此您可以立即应用已有的技能和代码。
+-Calm藍圖易於使用。在60分鐘內，您從零開始進行了完整的基礎架構堆疊部署。由於Calm使用標準工具（bash，PowerShell，Python等）進行配置，因此無需學習任何新語言，因此您可以立即應用已有的技能和代碼。
 
--尽管视觉效果不佳，但即使是单个VM蓝图也会对客户产生巨大影响。印度的一家银行正在将Calm用于单VM部署，从而将这些应用程序的部署时间从3天减少到2小时。请记住，当今许多客户很少或根本没有自动化（或者他们拥有的自动化非常复杂/难以理解，因此限制了它的采用）。这意味着Calm可以立即，立即，即时地为他们提供帮助。
+-儘管視覺效果不佳，但即使是單個VM藍圖也會對客戶產生巨大影響。印度的一家銀行正在將Calm用於單VM部署，從而將這些應用程式的部署時間從3天減少到2小時。請記住，當今許多客戶很少或根本沒有自動化（或者他們擁有的自動化非常複雜/難以理解，因此限制了它的採用）。這意味著Calm可以立即，立即，即時地為他們提供幫助。
 
--“多云应用程序自动化和生命周期管理”听起来很吓人。 “未来”听起来很棒，但是许多操作员看不到通往那里的道路。聆听客户今天所苦恼的事情（备份需要专业技能，VM部署需要很长时间，升级很困难），并讲解Calm如何提供帮助；跳到多云自动化的故事，将Calm从“我现在需要这个”推到“一旦事情平静下来，让我们稍后再评估一下”（而且事情永远不会真正“安静下来（Calm）”。）
+-“多雲應用程式自動化和生命週期管理”聽起來很嚇人。 “未來”聽起來很棒，但是許多操作員看不到通往那裡的道路。聆聽客戶今天所苦惱的事情（備份需要專業技能，VM部署需要很長時間，升級很困難），並講解Calm如何提供幫助；跳到多雲自動化的故事，將Calm從“我現在需要這個”推到“一旦事情平靜下來，讓我們稍後再評估一下”（而且事情永遠不會真正“安靜下來（Calm）”。）
 
--蓝图编辑器提供了一个简单的UI，用于为可能复杂的应用程序建模。
+-藍圖編輯器提供了一個簡單的UI，用於為可能複雜的應用程式建模。
 
--蓝图与SSP项目相关，可用于实施配额和基于角色的访问控制。
+-藍圖與SSP專案相關，可用於實施配額和基於角色的存取控制。
 
--具有蓝图安装和配置二进制文件意味着不再为单个应用程序创建特定的映像。相反，可以通过对蓝图或安装脚本的更改来修改应用程序，这两种方法都可以存储在源代码存储库中。
+-具有藍圖安裝和配置二進位檔案意味著不再為單個應用程式創建特定的映射。相反，可以通過對藍圖或安裝腳本的更改來修改應用程式，這兩種方法都可以儲存在原始程式碼儲存庫中。
 
--变量允许自定义应用程序的另一个维度，而无需编辑基础蓝图。
+-變數允許自訂應用程式的另一個維度，而無需編輯基礎藍圖。
 
--有多种对VM进行身份验证的方法（密钥或密码），具体取决于源映像。
+-有多種對VM進行身份驗證的方法（金鑰或密碼），具體取決於源映射。
 
--可以实时监视应用程序状态。
+-可以即時監視應用程式狀態。
 
--应用程序通常跨多个VM，每个VM负责不同的服务。 Calm能够自动化和协调完整的应用程序。
+-應用程式通常跨多個VM，每個VM負責不同的服務。 Calm能夠自動化和協調完整的應用程式。
 
--服务之间的依赖关系可以在蓝图编辑器中轻松建模。
+-服務之間的相依性關係可以在藍圖編輯器中輕鬆建模。
 
--用户可以快速调配整个应用程序堆栈以进行生产或测试，以获得可重复的结果，而不会浪费时间进行手动配置。
+-使用者可以快速調配整個應用程式堆疊以進行生產或測試，以獲得可重複的結果，而不會浪費時間進行手動配置。
 
--有兴趣使用Calm进行更多应用生命周期操作吗？看看 :ref:`calm_day2`!
+-有興趣使用Calm進行更多應用生命週期操作嗎？看看 :ref:`calm_day2`!
 
 
 .. |proj-icon| image:: ../images/projects_icon.png

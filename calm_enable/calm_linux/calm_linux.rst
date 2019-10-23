@@ -1,38 +1,38 @@
 .. _calm_linux:
 
 ---------------------
-Calm: Linux 工作负载
+Calm: Linux 工作負載
 ---------------------
 
-*预计 60 分钟完成.*
+*預計 60 分鐘完成.*
 
-简介
+簡介
 ++++++++
 
-Nutanix Calm允许您在私有云和公共云的基础架构中无缝选择，配置和管理业务应用程序。 Nutanix Calm提供应用程序生命周期，监控和修复，以管理异构基础架构，例如VM或裸机服务器。 Nutanix Calm支持多种平台，因此您可以使用单一的自助服务和自动化界面来管理所有基础架构。
+Nutanix Calm允許您在私有雲和公共雲的基礎架構中無縫選擇，配置和管理業務應用程式。 Nutanix Calm提供應用程式生命週期，監控和修復，以管理異構基礎架構，例如VM或裸機伺服器。 Nutanix Calm支援多種平臺，因此您可以使用單一的自助服務和自動化介面來管理所有基礎架構。
 
-**在本实验中，您将通过构建和部署使用MySQL，nginix和HAProxy安装和配置多层任务管理器Web应用程序的蓝图来探索Nutanix Calm的基础知识。**
+**在本實作中，您將通過構建和部署使用MySQL，nginix和HAProxy安裝和配置多層工作管理員Web應用程式的藍圖來探索Nutanix Calm的基礎知識。**
 
-创建蓝图
+創建藍圖
 ++++++++++++++++++++
 
-蓝图是使用Nutanix Calm建模的每个应用程序的框架。 蓝图是描述在创建的服务和应用程序上配置，配置和执行任务所需的所有步骤的模板。 您可以创建蓝图来表示应用程序的体系结构，然后重复运行蓝图以创建实例，配置和启动应用程序。 蓝图还定义了应用程序及其底层基础架构的生命周期，从创建应用程序到在蓝图上执行的操作，直到应用程序终止。
+藍圖是使用Nutanix Calm建模的每個應用程式的框架。 藍圖是描述在創建的服務和應用程式上配置，配置和執行任務所需的所有步驟的範本。 您可以創建藍圖來表示應用程式的體系結構，然後重複運行藍圖以創建實例，配置和啟動應用程式。 藍圖還定義了應用程式及其底層基礎架構的生命週期，從創建應用程式到在藍圖上執行的操作，直到應用程式終止。
 
-您可以使用蓝图来模拟各种复杂性的应用程序; 从简单地配置单个虚拟机到配置和管理多节点，多层应用程序。
+您可以使用藍圖來類比各種複雜性的應用程式; 從簡單地配置單個虛擬機器到配置和管理多節點，多層應用程式。
 
-#. 在 **Prism Central**, 选择 :fa:`bars` **> Services > Calm**.
+#. 在 **Prism Central**, 選擇 :fa:`bars` **> Services > Calm**.
 
    .. figure:: images/1.png
 
-#. 选择左边工具栏 |blueprints| **Blueprints** 来查看和管理Calm 蓝图。
+#. 選擇左邊工具列 |blueprints| **Blueprints** 來查看和管理Calm 藍圖。
 
    .. note::
 
-     将鼠标悬停在图标上将显示其标题。
+     將滑鼠懸停在圖示上將顯示其標題。
 
-#. 点击 **+ Create Blueprint > Multi VM/Pod Blueprint**.
+#. 點擊 **+ Create Blueprint > Multi VM/Pod Blueprint**.
 
-#. 填写以下字段:
+#. 填寫以下欄位:
 
    - **Name** - *Initials*-CalmLinuxIntro
    - **Description** - [Task Manager Application](\http://@@{HAProxy.address}@@/)
@@ -40,22 +40,22 @@ Nutanix Calm允许您在私有云和公共云的基础架构中无缝选择，�
 
    .. figure:: images/2.png
 
-#. 点击 **Proceed** 打开蓝图编辑器Blueprint Editor.
+#. 點擊 **Proceed** 打開藍圖編輯器Blueprint Editor.
 
-   Blueprint Editor提供了各种组件的图形表示，使您可以在环境中可视化和配置组件及其依赖项。
+   Blueprint Editor提供了各種元件的圖形表示，使您可以在環境中視覺化和配置元件及其相依性項。
 
-创建用户凭证
+創建用戶憑證
 ++++++++++++++++++++
 
-首先，您将创建一个凭证，用于向最终部署的CentOS VM验证Calm。 凭证对于每个蓝图都是唯一的，出于安全目的，**不会**作为蓝图的一部分导出。 每个蓝图至少需要1个凭证。
+首先，您將創建一個憑證，用於向最終部署的CentOS VM驗證Calm。 憑證對於每個藍圖都是唯一的，出於安全目的，**不會**作為藍圖的一部分匯出。 每個藍圖至少需要1個憑證。
 
-本练习使用“Generic Cloud”CentOS映像。 对于多个流行的Linux发行版来说，这是一个常见的选项，它是轻量级的，支持基于Cloud-Init的配置，并利用 `SSH keypair authentication <https://www.ssh.com/ssh/public-key-authentication>`_ 而非密码。 基于密钥对的身份验证在所有公共云环境中都很常见。
+本練習使用“Generic Cloud”CentOS映像檔。 對於多個流行的Linux發行版本來說，這是一個常見的選項，它是最小安裝的，支援基於Cloud-Init的配置，並利用 `SSH keypair authentication <https://www.ssh.com/ssh/public-key-authentication>`_ 而非密碼。 基於金鑰對的身份驗證在所有公共雲環境中都很常見。
 
-#. 点击 **Credentials**.
+#. 點擊 **Credentials**.
 
    .. figure:: images/3.png
 
-#. 点击 **Credentials** :fa:`plus-circle` 填写以下字段:
+#. 點擊 **Credentials** :fa:`plus-circle` 填寫以下欄位:
 
    - **Credential Name** - CENTOS
    - **Username** - centos
@@ -94,9 +94,9 @@ Nutanix Calm允许您在私有云和公共云的基础架构中无缝选择，�
 
    .. figure:: images/4.png
 
-#. 点击 **Save**, 然后 **Back**.
+#. 點擊 **Save**, 然後 **Back**.
 
-定义变量
+定義變數
 ++++++++++++++++++
 
 Variables allow extensibility of Blueprints, meaning a single Blueprint can be used for multiple purposes and environments depending on the configuration of its variables.
@@ -108,14 +108,14 @@ Variables can be used in scripts executed against objects using the **@@{variabl
 
 #. In the **Configuration Pane** on the right side of the Blueprint Editor, under **Variables**, add the following variables (**Runtime** is specified by toggling the **Running Man** icon to Blue):
 
-变量允许蓝图的可扩展性，这意味着单个蓝图可以用于多种用途和环境，具体取决于其变量的配置。
-变量可以是作为蓝图的一部分保存的静态值，也可以在**Runtime**（启动蓝图时）指定。变量特定于给定的** Application Profile **，它是部署蓝图的平台。例如，能够部署到AHV和AWS的蓝图将具有2个应用程序配置文件。每个配置文件可以具有单独的变量和VM配置。
+變數允許藍圖的可擴展性，這意味著單個藍圖可以用於多種用途和環境，具體取決於其變數的配置。
+變數可以是作為藍圖的一部分保存的靜態值，也可以在**Runtime**（啟動藍圖時）指定。變數特定於給定的** Application Profile **，它是部署藍圖的平臺。例如，能夠部署到AHV和AWS的藍圖將具有2個應用程式設定檔。每個設定檔可以具有單獨的變數和VM配置。
 
-默认情况下，变量存储为** String **，并在配置窗格中可见。将变量设置为** Secret **将屏蔽该值，非常适用于密码等变量。除了String和Secret选项之外，还有整数，多行字符串，日期，时间和日期时间**数据类型**，以及更高级的**输入类型**，但这些不在此范围内实验室。
+預設情況下，變數存儲為** String **，並在配置窗格中可見。將變數設置為** Secret **將遮罩該值，非常適用於密碼等變數。除了String和Secret選項之外，還有整數，多行字串，日期，時間和日期時間**資料類型**，以及更高級的**輸入類型**，但這些不在此範圍內實驗室。
 
-可以使用** @@ {variable_name} @@ **构造在对象执行的脚本中使用变量。在发送到VM之前，Calm将使用适当的值扩展和替换变量。
+可以使用** @@ {variable_name} @@ **構造在物件執行的腳本中使用變數。在發送到VM之前，Calm將使用適當的值擴展和替換變數。
 
-＃。在Blueprint Editor右侧的**配置窗格**中，在**变量**下，添加以下变量（**运行时**通过将** Running Man **图标切换为蓝色来指定）：
+＃。在Blueprint Editor右側的**配置窗格**中，在**變數**下，添加以下變數（**運行時**通過將** Running Man **圖示切換為藍色來指定）：
 
    +------------------------+-------------------------------+------------+-------------+
    | **Variable Name**      | **Data Type** | **Value**     | **Secret** | **Runtime** |
