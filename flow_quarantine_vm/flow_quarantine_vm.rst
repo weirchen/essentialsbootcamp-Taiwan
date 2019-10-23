@@ -1,74 +1,74 @@
 .. _flow_quarantine_vm:
 
 -------------------
-Flow: 检疫隔离虚拟机（Quarantine）
+Flow: 檢疫隔離虛擬機器（Quarantine）
 -------------------
 
-*完成本实验预计需要10分钟.*
+*完成本實作預計需要10分鐘.*
 
 概述
 ++++++++
 
-检疫隔离可以分配虚拟机受限的策略，为管理员提供了要么阻止所有流量或允许部分子网流量的一个选项。严格检疫隔离（Strict）阻止虚拟机的所有通信，而取证检疫隔离（Forensic）则允许预定义列表的进站和出站流量。
+檢疫隔離可以分配虛擬機器受限的策略，為管理員提供了要麼阻止所有流量或允許部分子網流量的一個選項。嚴格檢疫隔離（Strict）阻止虛擬機器的所有通信，而取證檢疫隔離（Forensic）則允許預定義列表的進站和出站流量。
 
-检疫隔离虚拟机
+檢疫隔離虛擬機器
 +++++++++++++++++
 
-在本任务中，我们会把一台虚拟机做检疫隔离，并观察这台虚拟机的行为。我们也将检查检疫隔离策略里面的可配置选项。
+在本任務中，我們會把一台虛擬機器做檢疫隔離，並觀察這台虛擬機器的行為。我們也將檢查檢疫隔離策略裡面的可配置選項。
 
 #. 返回 *Initials*\ **-WinClient-0** 控制台.
 
-#. 打开 **Command Prompt** 并运行 ``ping -t HAPROXY-VM-IP`` 以验证客户端与负载均衡器之间的连通性。
+#. 打開 **Command Prompt** 並運行 ``ping -t HAPROXY-VM-IP`` 以驗證用戶端與負載平衡器之間的連通性。
 
    .. note::
 
-     如果PING测试不成功，你可能需要将 **Environment:Dev** 的入站规则更新为 **AppTier:**\ *Initials*-**TMLB** ，把 **ICMP** 流量的 **Type** 和 **Code** 置为 **Any** ，如下图所示。应用更新后的 **AppTaskMan-**\ *Initials* 策略，PING应该可以成功。
+     如果PING測試不成功，你可能需要將 **Environment:Dev** 的入站規則更新為 **AppTier:**\ *Initials*-**TMLB** ，把 **ICMP** 流量的 **Type** 和 **Code** 置為 **Any** ，如下圖所示。應用更新後的 **AppTaskMan-**\ *Initials* 策略，PING應該可以成功。
 
      .. figure:: images/41.png
 
-#. 在 **Prism Central > Virtual Infrastructure > VMs**, 选择 *Initials*\ **-HAPROXY-0...** VM.
+#. 在 **Prism Central > Virtual Infrastructure > VMs**, 選擇 *Initials*\ **-HAPROXY-0...** VM.
 
-#. 单击 **Actions > Quarantine VMs**.
+#. 按一下 **Actions > Quarantine VMs**.
 
    .. figure:: images/42.png
 
-#. 选择 **Forensic** 并点击 **Quarantine**.
+#. 選擇 **Forensic** 並點擊 **Quarantine**.
 
-   客户端和负载均衡器之间连续ping会怎样？ 您可以从客户端虚拟机访问任务管理器应用程序网页吗？
+   用戶端和負載平衡器之間連續ping會怎樣？ 您可以從用戶端虛擬機器存取工作管理員應用程式網頁嗎？
 
-#. 在 **Prism Central**, 选择 :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies > Quarantine** 以查看所有检疫隔离的虚拟机。
+#. 在 **Prism Central**, 選擇 :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies > Quarantine** 以查看所有檢疫隔離的虛擬機器。
 
-#. 点击 **Update** 以编辑检疫隔离策略（Quarantine policy）.
+#. 點擊 **Update** 以編輯檢疫隔離策略（Quarantine policy）.
 
-   为了说明Flow此特殊策略的功能，您将客户端虚拟机添加为“取证工具”。 在生产环境中，允许对检疫隔离虚拟机进行入站访问的虚拟机可用于运行安全性和取证套件，例如Kali Linux或SANS SIFT。
+   為了說明Flow此特殊策略的功能，您將用戶端虛擬機器添加為“取證工具”。 在生產環境中，允許對檢疫隔離虛擬機器進行入站存取的虛擬機器可用於運行安全性和取證套件，例如Kali Linux或SANS SIFT。
 
-#. 在 **Inbound** 下, 点击 **+ Add Source**.
+#. 在 **Inbound** 下, 點擊 **+ Add Source**.
 
-#. 填写以下字段:
+#. 填寫以下欄位:
 
-   - **Add source by:** - 选择 **Subnet/IP**
+   - **Add source by:** - 選擇 **Subnet/IP**
    - 指定 *Your WinClient VM IP*\ /32
 
-   这个源端可以连接到哪些目标端呢？取证（Forensic）和严格（Strict）检疫隔离模式有什么区别呢？
+   這個來源端可以連接到哪些目標端呢？取證（Forensic）和嚴格（Strict）檢疫隔離模式有什麼區別呢？
 
-   请注意，把虚拟机添加到 **Strict** 检疫隔离策略后，会禁止所有与虚拟机间的进站和出站通信。 **Strict** 策略适用于网络上对环境产生威胁的虚拟机。
+   請注意，把虛擬機器添加到 **Strict** 檢疫隔離策略後，會禁止所有與虛擬機器間的進站和出站通信。 **Strict** 策略適用於網路上對環境產生威脅的虛擬機器。
 
-#. 点击 :fa:`plus-circle` 图标左边的 **Quarantine: Forensic** 来创建进站规则.
+#. 點擊 :fa:`plus-circle` 圖示左邊的 **Quarantine: Forensic** 來創建進站規則.
 
-#. 单击 **Save** 以允许客户虚拟机与 **Quarantine: Forensic** 类别之间的任意端口上的任意协议。
+#. 按一下 **Save** 以允許客戶虛擬機器與 **Quarantine: Forensic** 類別之間的任意埠上的任意協議。
 
    .. figure:: images/43.png
 
-#. 单击 **Next > Apply Now** 以保存和应用更新的策略。
+#. 按一下 **Next > Apply Now** 以保存和應用更新的策略。
 
-   添加源后，与负载均衡器之间的PING会发生什么呢？你可以访问任务管理器Web应用吗？ 
+   添加來源後，與負載平衡器之間的PING會發生什麼呢？你可以存取工作管理員Web應用嗎？ 
 
-#. 通过选定Prism Central中的虚拟机，单击 **Actions > Unquarantine VMs** ，你可以从 **Quarantine: Forensic** 类别中移除负载均衡器虚拟机。
+#. 通過選定Prism Central中的虛擬機器，按一下 **Actions > Unquarantine VMs** ，你可以從 **Quarantine: Forensic** 類別中移除負載平衡器虛擬機器。
 
-概要总结
+概要總結
 +++++++++
 
-- 本练习中，你使用Flow来检疫隔离的两种模式来隔离一台虚拟机（Strict严格和Forensic取证）
-- 检疫隔离的策略的优先级高于应用策略。检疫隔离可以阻止被应用策略所允许的流量。
-- 当虚拟机被检疫隔离时，取证模式（Forensic）是允许对其有限访问的关键。
+- 本練習中，你使用Flow來檢疫隔離的兩種模式來隔離一台虛擬機器（Strict嚴格和Forensic取證）
+- 檢疫隔離的策略的優先順序高於應用策略。檢疫隔離可以阻止被應用策略所允許的流量。
+- 當虛擬機器被檢疫隔離時，取證檢疫模式（Forensic）是允許對其有限存取的關鍵。
 

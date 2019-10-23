@@ -1,50 +1,50 @@
 .. _prism_central_dashboards_reports:
 
 -------------------------------------
-Prism Central: 仪表板和报表
+Prism Central: 儀表板和報表
 -------------------------------------
 
-简介
+簡介
 ++++++++
 
-本实验将介绍Prism Central的面板和报表功能.
+本實驗將介紹Prism Central的面板和報表功能.
 
 Prism Central 面板
 ++++++++++++++++++++++++
 
-Prism Central 仪表板允许您快速查看在Prism Central实例下注册的系统的当前状态。
+Prism Central 儀表板允許您快速查看在Prism Central實例下註冊的系統的當前狀態。
 
-您可以从仪表板获得的信息类型取决于您的兴趣。它可以包括与集群运行状况相关的任何事件的警报，一直到性能信息。
+您可以從儀表板獲得的資訊類型取決於您的興趣。它可以包括與集群運行狀況相關的任何事件的警報，一直到效能資訊。
 
 .. figure:: images/510PC1.png
 
-创建定制化仪表板
+創建客製化儀表板
 .........................
 
-仪表板也可以定制化
+儀表板也可以客製化
 
-#. 点击 **Home X**
+#. 點擊 **Home X**
 
-主仪表板是系统首次安装时显示的第一个仪表板。
+主儀表板是系統首次安裝時顯示的第一個儀表板。
 
-#. 此仪表板也可以自定义，但我们会创建新的仪表板。
+#. 此儀表板也可以自訂，但我們會創建新的儀表板。
 
-#. 点击 **Manage Dashboards** 打开“管理仪表板”窗口
+#. 點擊 **Manage Dashboards** 打開“管理儀表板”視窗
 
-#. 点击 **+ New Dashboard**
+#. 點擊 **+ New Dashboard**
 
-#. 输入 "Dashboard-*intials*" 作为名称，然后单击 **Save**.
+#. 輸入 "Dashboard-*intials*" 作為名稱，然後按一下 **Save**.
 
 .. figure:: images/510PC2.png
 
-#. 现在我们添加一些窗口小部件.
+#. 現在我們添加一些視窗小工具.
 
 
 .. note::
 
-  窗口小部件指的是仪表板的不同部分。窗口小部件可以是图形，警报板，也可以是显示信息块的信息表。您可以选择让小部件通知您感兴趣的任何信息，只需从可用的实体中进行选择即可。
+  視窗小工具指的是儀表板的不同部分。視窗小工具可以是圖形，警報板，也可以是顯示區塊的資訊表。您可以選擇讓小工具通知您感興趣的任何資訊，只需從可用的實體中進行選擇即可。
 
-#. 点击 **Add Widgets**.
+#. 點擊 **Add Widgets**.
 
 #. From the list of available Widgets on the left hand side, notice there are three types of Widgets:
 
@@ -52,79 +52,79 @@ Prism Central 仪表板允许您快速查看在Prism Central实例下注册的�
 - CLUSTER WIDGETS
 - APP WIDGETS
 
-#. 选择 **CUSTOM WIDGETS** 里您可能感兴趣的任何小部件，并注意右侧显示一组自定义参数以指定。
+#. 選擇 **CUSTOM WIDGETS** 裡您可能感興趣的任何小工具，並注意右側顯示一組自訂參數以指定。
 
-#. 根据需要在选项中进行选择，然后单击 **Add to Dashboard**.
+#. 根據需要在選項中進行選擇，然後按一下 **Add to Dashboard**.
 
 .. figure:: images/510PC4.png
 
-#. 接下来，从 **CLUSTER WIDGETS**列表中选择另一个小部件。 这次单击 **Or, Add & Return to Dashboard.** 返回新创建的仪表板。
+#. 接下來，從 **CLUSTER WIDGETS**列表中選擇另一個小工具。 這次按一下 **Or, Add & Return to Dashboard.** 返回新創建的儀表板。
 
 .. note::
 
-  Prism Central的右上角有一个 **+ Add Widgets**按钮，可以随时添加更多小部件。
+  Prism Central的右上角有一個 **+ Add Widgets**按鈕，可以隨時添加更多小工具。
 
-  另请注意，将鼠标悬停在仪表板上的任何小部件上都会在右上角显示一个灰色的X，可用于删除小部件。
+  另請注意，將滑鼠懸停在儀表板上的任何小工具上都會在右上角顯示一個灰色的X，可用於刪除小工具。
 
 .. figure:: images/510PC5.png
 
-Prism Central 报表
+Prism Central 報表
 +++++++++++++++++++++
 
-Prism Central允许您生成有关群集环境的历史报告，可用于帮助管理员监控他们管理的群集的运行状况和性能。此类报告可包括资源消耗，异常行为和其他有价值的操作见解。这些报告可以手动生成，也可以从Prism Central自动生成，以便在最方便时通过电子邮件发送。
+Prism Central允許您生成有關群集環境的歷史報告，可用于幫助管理員監控他們管理的群集的運行狀況和效能。此類報告可包括資源消耗，異常行為和其他有價值的操作見解。這些報告可以手動生成，也可以從Prism Central自動生成，以便在最方便時通過電子郵件發送。
 
 #. 在 **Prism Central  > Operations > Reports**.
 
-#. 在那里，您将看到两个预定义的报告可供您立即使用:
+#. 在那裡，您將看到兩個預定義的報告可供您立即使用:
 
 - Cluster Efficiency Summary
 - Environment Summary
 
 .. figure:: images/510reports1.png
 
-#. 让我们运行 **Cluster Efficiency Summary** 报表.
+#. 讓我們運行 **Cluster Efficiency Summary** 報表.
 
-#. 选择 **Cluster Efficiency Summary**, 点击在 **Actions** 下拉菜单中的 **Run** .
+#. 選擇 **Cluster Efficiency Summary**, 點擊在 **Actions** 下拉式功能表中的 **Run** .
 
 .. figure:: images/monitoring_01.png
 
-#. 接下来，填写以下字段并从 **Actions** 下拉菜单单击 **Run** :
+#. 接下來，填寫以下欄位並從 **Actions** 下拉式功能表按一下 **Run** :
 
 - **Report instance Name** - *initials* - Cluster Efficiency 
 - **Time Period for Report** - Last 24 Hours
 
-#. 点击 **Run**.
+#. 點擊 **Run**.
 
-#. 现在我们来运行 **Environment Summary** 报表.
+#. 現在我們來運行 **Environment Summary** 報表.
 
-#. 选择 **Environment Summary**, 从 **Actions**下拉菜单点击 **Run** .
+#. 選擇 **Environment Summary**, 從 **Actions**下拉式功能表點擊 **Run** .
 
-#. 接下来，填写以下字段并单击 **Run**:
+#. 接下來，填寫以下欄位並按一下 **Run**:
 
 - **Report instance Name** - *initials* - Environment Summary
 - **Time Period for Report** - Last 24 Hours
 
-#. 点击 **Run**.
+#. 點擊 **Run**.
 
-#. 报告完成后，选择每个报告，然后执行以下操作:
+#. 報告完成後，選擇每個報告，然後執行以下操作:
 
-#. 点击 **View Instances.** 从 **Actions** 的下拉菜单.
+#. 點擊 **View Instances.** 從 **Actions** 的下拉式功能表.
 
-- 要在单独的选项卡中查看报告，请单击报告的名称。
-- 要下载报告，请选中其复选框，然后单击右上页面的 **Download**。
+- 要在單獨的選項卡中查看報告，請按一下報告的名稱。
+- 要下載報告，請選中其核取方塊，然後按一下右上頁面的 **Download**。
 
-#. 查看您在本练习中创建的报告的内容。
+#. 查看您在本練習中創建的報告的內容。
 
-生成定制化报表
+生成客製化報表
 ......................
 
-#. 要创建新的自定义报告，请单击 **+ New Report**.
+#. 要創建新的自訂報告，請按一下 **+ New Report**.
 
-#. 修改报表名字 **New Report** 为 *initials*-**Report**
+#. 修改報表名字 **New Report** 為 *initials*-**Report**
 
 .. figure:: images/510reports3.png
 
-#. 从 **CUSTOM VIEWS** 目录左边, 点击 **Line Chart**填写下面信息:
+#. 從 **CUSTOM VIEWS** 目錄左邊, 點擊 **Line Chart**填寫下面資訊:
 
 - **Entity Type** - Cluster
 - **Metric** - Memory Usage
@@ -132,49 +132,49 @@ Prism Central允许您生成有关群集环境的历史报告，可用于帮助�
 - **Number of Entities** – 10
 - **Sort Order** - Ascending
 
-#. 点击 **Add**
+#. 點擊 **Add**
 
 .. figure:: images/510reports2.png
 
-#. 从 **PRE-DEFINED VIEWS**, 点击任何你感兴趣的entities对象。
+#. 從 **PRE-DEFINED VIEWS**, 點擊任何你感興趣的entities物件。
 
 .. note::
 
-  由于这些是预定义的，因此不需要额外的配置步骤，它们会立即添加到报告中。
+  由於這些是預定義的，因此不需要額外的配置步驟，它們會立即添加到報告中。
 
-#. 点击位于右边角落的 **Add Schedule** 按钮添加自动生成报告计划。
+#. 點擊位於右邊角落的 **Add Schedule** 按鈕添加自動生成報告計畫。
 
-#. 选择任何所需的频率，时间和持续时间以运行报告。
+#. 選擇任何所需的頻率，時間和持續時間以運行報告。
 
 .. figure:: images/510reports4.png
 
 .. note:: 
 
-  如果在Prism Central中正确配置了SMTP，则此自动报告也可以发送到输入的任何有效电子邮件地址。
+  如果在Prism Central中正確配置了SMTP，則此自動報告也可以發送到輸入的任何有效電子郵寄地址。
 
-#. 定制完你的报表之后点击 **Save** 。
+#. 客製完你的報表之後點擊 **Save** 。
 
-#. 现在您的报告已保存，但请注意，它没有任何实例。 这是因为我们还没有运行报告。
+#. 現在您的報告已保存，但請注意，它沒有任何實例。 這是因為我們還沒有運行報告。
 
-#. 点击右上角的 **Run**来运行报告。
+#. 點擊右上角的 **Run**來運行報告。
 
 .. figure:: images/510reports5.png
 
 .. note::
 
-  克隆报告对于利用现有报告并对其进行编辑以进一步进行自定义非常有用。
+  複製報告對於利用現有報告並對其進行編輯以進一步進行自訂非常有用。
 
-#. 报告完成后，您将通过单 **下载**下的**PDF**看到报告的第一个实例可供查看。
+#. 報告完成後，您將通過單 **下載**下的**PDF**看到報告的第一個實例可供查看。
 
-#. 然后单击右上角的X退出。
+#. 然後按一下右上角的X退出。
 
-#. 如果您按原样保留报告，它将自动运行并以设置的特定频率和时间发送到提供的电子邮件地址。
+#. 如果您按原樣保留報告，它將自動運行並以設置的特定頻率和時間發送到提供的電子郵寄地址。
 
-#. 如果需要不同的颜色或徽标，也可以在 **Report Settings**下自定义报告。
+#. 如果需要不同的顏色或徽標，也可以在 **Report Settings**下自訂報告。
 
 
-概要总结
+概要總結
 +++++++++
 
-- Prism Central可自定义仪表板允许您使用他们关心的信息设置用户和团队特定仪表板。
-- Prism Central报告管理功能使您能够根据配置的计划配置和提供包含有关基础结构资源的信息的历史报告。
+- Prism Central可自訂儀表板允許您使用他們關心的資訊設置使用者和團隊特定儀表板。
+- Prism Central報告管理功能使您能夠根據配置的計畫配置和提供包含有關基礎結構資源的資訊的歷史報告。
