@@ -80,12 +80,12 @@
 .. _getting_started:
 
 ---------------
-开动实验
+開始實作
 ---------------
 
-欢迎来到Nutanix Essentials训练营！ 本实验手册伴随着讲师指导的培训，介绍了Nutanix解决方案和许多常见的管理任务。 每个部分都有一个课程和实验，为您提供实践练习。 讲师会讲解练习并回答您可能遇到的任何其他问题。
+歡迎來到Nutanix Essentials訓練營！ 本實作手冊伴隨著講師指導的培訓，介紹了Nutanix解決方案和許多常見的管理任務。 每個部分都有一個課程和實作，為您提供實踐練習。 講師會講解練習並回答您可能遇到的任何其他問題。
 
-在训练营结束时，与会者应该了解Nutanix企业云堆栈的基本概念和技术，并且应该为托管或现场概念验证（POC）参与做好充分准备。
+在訓練營結束時，與會者應該瞭解Nutanix企業雲平台的基本概念和技術，並且應該為託管或現場概念驗證（POC）參與做好充分準備。
 
 
 What's New
@@ -94,40 +94,40 @@ What's New
 - Workshop updated for the following software versions:
     - AOS & PC 5.11
 
-- 可选的实验更新:
+- 可選的實作更新:
 
 
 日程
 ++++++
 
-- 简介
+- 簡介
 - Prism Pro
 - Files
 - Nutanix Calm
 - Nutanix Flow
 
-简介
+簡介
 +++++++++++++
 
-- 名称
+- 名稱
 - 熟悉 Nutanix
 
-初识化设置
+設置介紹
 +++++++++++++
 
-- 记下使用的密码。
-- 登录虚拟桌面（基于下面的连接信息）
+- 記下使用的密碼。
+- 登錄虛擬桌面（基於下面的連接資訊）
 
-环境说明
+環境說明
 +++++++++++++++++++
 
-Nutanix Workshop旨在Nutanix Hosted POC环境中运行。 将为您的群集配置完成练习所需的所有必要图像，网络和VM。
+Nutanix Workshop旨在Nutanix Hosted POC環境中運行。 將為您的群集配置完成練習所需的所有必要圖像，網路和VM。
 
 
-网络
+網路
 ..........
 
-Hosted POC 集群遵循标准命名约定:
+Hosted POC 集群遵循標準命名約定:
 
 - **Cluster Name** - POC\ *XYZ*
 - **Subnet** - 10.**21**.\ *XYZ*\ .0
@@ -144,7 +144,7 @@ If provisioned from the marketing pool:
 - **Subnet** - 10.21.55.0
 - **Cluster IP** - 10.21.55.37
 
-在整个Workshop期间，有多个实例需要用* XYZ *替换正确的子网，例如:
+在整個Workshop期間，有多個實例需要用* XYZ *替換正確的子網路，例如:
 
 .. list-table::
    :widths: 25 75
@@ -159,7 +159,7 @@ If provisioned from the marketing pool:
    * - 10.21.\ *XYZ*\ .40
      - **DC** VM IP, NTNXLAB.local Domain Controller
 
-每个群集配置有2个可用于VM的VLAN:
+每個群集配置有2個可用於VM的VLAN:
 
 .. list-table::
   :widths: 25 25 10 40
@@ -178,12 +178,12 @@ If provisioned from the marketing pool:
     - *XYZ1*
     - 10.21.\ *XYZ*\ .132-10.21.\ *XYZ*\ .253
 
-认证
+認證
 ...........
 
 .. note::
 
-  The *<Cluster Password>* 对每个群集都是唯一的，将由Workshop的负责人提供.
+  The *<Cluster Password>* 對每個群集都是唯一的，將由Workshop的負責人提供.
 
 .. list-table::
    :widths: 25 35 40
@@ -205,7 +205,7 @@ If provisioned from the marketing pool:
      - nutanix
      - *<Cluster Password>*
 
-每个群集都有一个专用的域控制器VM, **DC**, 负责为 **NTNXLAB.local** 域提供AD服务. 该域包括了以下用户和组：:
+每個群集都有一個專用的網域控制站VM, **DC**, 負責為 **NTNXLAB.local** 網域提供AD服務. 該網域包括了以下用戶和群組：:
 
 
 .. list-table::
@@ -231,10 +231,10 @@ If provisioned from the marketing pool:
      - basicuser01-basicuser25
      - nutanix/4u
 
-访问说明
+存取說明
 +++++++++++++++++++
 
-可以通过多种不同方式访问Nutanix Hosted POC环境:
+可以通過多種不同方式存取Nutanix Hosted POC環境:
 
 Parallels VDI
 .................
@@ -247,7 +247,7 @@ Login to: https://xld-uswest1.nutanix.com (for PHX) or https://xld-useast1.nutan
 
 
 
-Nutanix 版本信息
+Nutanix 版本資訊
 ++++++++++++++++++++
 
 - **AHV Version** - AHV 20170830.279 (5.10+)
