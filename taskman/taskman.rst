@@ -4,90 +4,90 @@
 部署Task Manager
 ----------------------
 
-*完成本实验的估计时间为10分钟。*
+*完成本實作的估計時間為10分鐘。*
 
-简介
+簡介
 ++++++++
 
-**此练习将引导您完成导入和启动Calm蓝图的工作，以部署用于多个实验室的简单Task Manager应用程序。 您无需完成此练习，除非指示您转而准备另一个实验室。**
+**此練習將引導您完成導入和啟動Calm藍圖的工作，以部署用於多個實作室的簡單Task Manager應用程式。 您無需完成此練習，除非指示您轉而準備另一個實作室。**
 
-验证默认 Project
+驗證默認 Project
 +++++++++++++++++++++++++++++
 
-在 **Prism Central**, 选择 :fa:`bars` **> Services > Calm**.
+在 **Prism Central**, 選擇 :fa:`bars` **> Services > Calm**.
 
 .. figure:: images/0.png
 
-在左手工具栏点击 |projects| **Projects** 并选择 **default** project.
+在左手工具列點擊 |projects| **Projects** 並選擇 **default** project.
 
 .. note::
 
-  将鼠标悬停在图标上将显示其标题。
+  將滑鼠懸停在圖示上將顯示其標題。
 
-在 **AHV Cluster** 下确认从下拉列表中选择了您分配的集群，否则选择它。
+在 **AHV Cluster** 下確認從下拉清單中選擇了您分配的集群，否則選擇它。
 
 .. figure:: images/1.png
 
-在 **Network** 下, 验证 **Primary** 和 **Secondary** 网络都被选择，**Primary** 网络为默认。 此外, 进行如下所示的选择。
+在 **Network** 下, 驗證 **Primary** 和 **Secondary** 網路都被選擇，**Primary** 網路為預設。 此外, 進行如下所示的選擇。
 
 .. figure:: images/2.png
 
-如果进行了更改，请单击 **Save**.
+如果進行了更改，請按一下 **Save**.
 
-导入蓝图
+導入藍圖
 +++++++++++++++++++++++
 
-右击 :download:`this link <TaskManager.json>` 并 **Save Link As...** 下载本练习中使用的示例应用程序的蓝图。
+右擊 :download:`this link <TaskManager.json>` 並 **Save Link As...** 下載本練習中使用的示例應用程式的藍圖。
 
-点击左侧工具栏中 |blueprints| **Blueprints** ，以查看可用的Calm蓝图。
+點擊左側工具列中 |blueprints| **Blueprints** ，以查看可用的Calm藍圖。
 
-点击 **Upload Blueprint** 并选择之前下载好的 **TaskManager.json**。
+點擊 **Upload Blueprint** 並選擇之前下載好的 **TaskManager.json**。
 
-填写以下字段
+填寫以下欄位
 
 - **Blueprint Name** - *Initials*-TaskManager
 - **Project** - default
 
 .. figure:: images/3.png
 
-点击 **Upload**.
+點擊 **Upload**.
 
 .. note::
 
-  如果您在尝试上传蓝图时遇到错误，请刷新浏览器，然后重试。
+  如果您在嘗試上傳藍圖時遇到錯誤，請刷新瀏覽器，然後重試。
 
-配置蓝图
+配置藍圖
 +++++++++++++++++++++++++
 
-在启动蓝图之前，必须首先提供指定的信息，这些信息未存储在导出的Calm蓝图中，包括凭证。
+在啟動藍圖之前，必須首先提供指定的資訊，這些資訊未存儲在匯出的Calm藍圖中，包括憑證。
 
-在左边 **Application Profile** 窗格, 填写以下字段：
+在左邊 **Application Profile** 窗格, 填寫以下欄位：
 
 - **Mysql_password** - nutanix/4u
 
 .. figure:: images/4.png
 
-选择右边窗格的 **WinClient** 服务, 在 **VM** 选项卡下, 确保 **Image** 设置为 **Windows10** 镜像，如下所示。
+選擇右邊窗格的 **WinClient** 服務, 在 **VM** 選項卡下, 確保 **Image** 設置為 **Windows10** 鏡像，如下所示。
 
 .. figure:: images/4b.png
 
-在 **Network Adapters (NICs)** 下, 确保 **NIC 1** 设置为 **Primary** ，如下所示.
+在 **Network Adapters (NICs)** 下, 確保 **NIC 1** 設置為 **Primary** ，如下所示.
 
 .. figure:: images/4c.png
 
-选择 **WebServer**, **HAProxy**, 和 **MySQL** 服务并确保 **NIC 1** 设置为 **Primary**.
+選擇 **WebServer**, **HAProxy**, 和 **MySQL** 服務並確保 **NIC 1** 設置為 **Primary**.
 
 .. figure:: images/4d.png
 
-点击 **Save**.
+點擊 **Save**.
 
 .. figure:: images/5.png
 
-点击 **Credentials**.
+點擊 **Credentials**.
 
 .. figure:: images/6.png
 
-通过点击其名字扩展 **CENTOS** 认证。 将以下密钥复制并粘贴到“ SSH私钥”字段中：
+通過點擊其名字擴展 **CENTOS** 認證。 將以下金鑰複製並粘貼到“ SSH私密金鑰”欄位中：
 
 ::
 
@@ -119,33 +119,33 @@
   gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
   -----END RSA PRIVATE KEY-----
 
-点击其名字扩展 **WIN_VM_CRED** 认证。 输入 **nutanix/4u** 作为 **Password**.
+點擊其名字擴展 **WIN_VM_CRED** 認證。 輸入 **nutanix/4u** 作為 **Password**.
 
 .. figure:: images/7.png
 
-点击 **Save**.
+點擊 **Save**.
 
-蓝图保存后, 点击 **Back**.
+藍圖保存後, 點擊 **Back**.
 
 .. figure:: images/8.png
 
-运行蓝图
+運行藍圖
 +++++++++++++++
 
-在提供认证后, **Publish**, **Download**, 和 **Launch** 现在可以从工具栏中使用。 点击 **Launch**.
+在提供認證後, **Publish**, **Download**, 和 **Launch** 現在可以從工具列中使用。 點擊 **Launch**.
 
-填写以下字段:
+填寫以下欄位:
 
 - **Name of the Application** - *Initials*-TaskManager1
 - **User_initials** - *Initials*
 
 .. figure:: images/9.png
 
-点击 **Create**.
+點擊 **Create**.
 
-您可以通过以下方式监视应用程序部署的状态： |applications| **Applications** 点击你应用程序的名字。
+您可以通過以下方式監視應用程式部署的狀態： |applications| **Applications** 點擊你應用程式的名字。
 
-设置完整的应用程序大约需要15分钟。 在配置应用程序时，继续进行实验的下一部分。
+設置完整的應用程式大約需要15分鐘。 在配置應用程式時，繼續進行實作的下一部分。
 
 .. |projects| image:: images/projects.png
 .. |blueprints| image:: images/blueprints.png

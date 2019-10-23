@@ -4,12 +4,12 @@
 Linux工具VM
 ---------------
 
-简介
+簡介
 +++++++++
 
-此CentOS VM镜像将与用于支持多个实验室练习的软件包一起暂存。
+此CentOS VM鏡像將與用於支持多個實作室練習的套裝軟體一起暫存。
 
-如果指示这样做，请在 ** Lab Setup **中将此虚拟机部署到您分配的群集上。
+如果指示這樣做，請在 ** Lab Setup **中將此虛擬機器部署到您分配的群集上。
 
 .. raw:: html
 
@@ -18,9 +18,9 @@ Linux工具VM
 部署 CentOS
 ++++++++++++++++
 
-在 **Prism Central** > 选择 :fa:`bars` **> Virtual Infrastructure > VMs**, 并点击 **Create VM**.
+在 **Prism Central** > 選擇 :fa:`bars` **> Virtual Infrastructure > VMs**, 並點擊 **Create VM**.
 
-填写以下字段：
+填寫以下欄位：
 
 - **Name** - *Initials*-Linux-ToolsVM
 - **Description** - (Optional) Description for your VM.
@@ -28,19 +28,19 @@ Linux工具VM
 - **Number of Cores per vCPU** - 2
 - **Memory** - 2 GiB
 
-- 选择 **+ Add New Disk**
+- 選擇 **+ Add New Disk**
     - **Type** - DISK
     - **Operation** - Clone from Image Service
     - **Image** - CentOS7.qcow2
-    - 选择 **Add**
+    - 選擇 **Add**
 
-- 选择 **Add New NIC**
+- 選擇 **Add New NIC**
     - **VLAN Name** - Secondary
-    - 选择 **Add**
+    - 選擇 **Add**
 
-- 检查 **Custom Script**
-    - 选择 **Type or Paste Script**
-    - 粘贴以下脚本并点击 **Save**
+- 檢查 **Custom Script**
+    - 選擇 **Type or Paste Script**
+    - 粘貼以下腳本並點擊 **Save**
 
 .. code-block:: bash
 
@@ -97,13 +97,13 @@ Linux工具VM
   final_message: CentOS 7 Tools Machine setup successfully!
 
 
-点击 **Save** 创建VM
+點擊 **Save** 創建VM
 
-开启VM
+開啟VM
 
-验证工具安装
+驗證工具安裝
 ++++++++++++++++++++
 
-打开控制台
+打開控制台
 
-观看the Cloud-Init 脚本的运行, 一旦看到 **CentOS 7 Tools Machine setup successfully!** 即完成部署。
+觀看the Cloud-Init 腳本的運行, 一旦看到 **CentOS 7 Tools Machine setup successfully!** 即完成部署。

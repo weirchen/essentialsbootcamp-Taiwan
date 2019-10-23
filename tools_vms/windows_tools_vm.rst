@@ -4,10 +4,10 @@
 Windows 工具 VM
 ----------------
 
-简介
+簡介
 +++++++++
 
-此Windows Server 2012 R2映像预装有许多工具，包括：
+此Windows Server 2012 R2映像檔預裝有許多工具，包括：
 
 - Microsoft Remote Server Administration Tools (RSAT)
 - PuTTY, CyberDuck, WinSCP
@@ -17,7 +17,7 @@ Windows 工具 VM
 - pgAdmin
 - Chocolatey Package Manager
 
-如果指示这样做，请在 ** Lab Setup **中将此虚拟机部署到您分配的群集上。
+如果指示這樣做，請在 ** Lab Setup **中將此虛擬機器部署到您分配的群集上。
 
 .. raw:: html
 
@@ -26,9 +26,9 @@ Windows 工具 VM
 部署工具VM
 ++++++++++++++++++
 
-在 **Prism Central** > 选择:fa:`bars` **> Virtual Infrastructure > VMs**, 并单击 **Create VM**.
+在 **Prism Central** > 選擇:fa:`bars` **> Virtual Infrastructure > VMs**, 並按一下 **Create VM**.
 
-填写以下字段：
+填寫以下欄位：
 
 - **Name** - *Initials*-Windows-ToolsVM
 - **Description** - (Optional) Description for your VM.
@@ -36,21 +36,21 @@ Windows 工具 VM
 - **Number of Cores per vCPU** - 2
 - **Memory** - 4 GiB
 
-- 选择 **+ Add New Disk**
+- 選擇 **+ Add New Disk**
     - **Type** - DISK
     - **Operation** - Clone from Image Service
     - **Image** - ToolsVM.qcow2
-    - 选择 **Add**
+    - 選擇 **Add**
 
-- 选择 **Add New NIC**
+- 選擇 **Add New NIC**
     - **VLAN Name** - Secondary
-    - 选择 **Add**
+    - 選擇 **Add**
 
-单击 **Save** 创建VM.
+按一下 **Save** 創建VM.
 
-启动VM.
+啟動VM.
 
-使用以下凭据通过RDP或控制台会话登录到VM：
+使用以下憑據通過RDP或控制台會話登錄到VM：
 
 - **Username** - NTNXLAB\\Administrator
 - **password** - nutanix/4u
