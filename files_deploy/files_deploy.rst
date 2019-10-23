@@ -4,47 +4,47 @@
 Files: 部署Nutanix Files功能
 -------------
 
-*完成本节所有文件实验所需的时间约为：1小时*
+*完成本節所有Files實作所需的時間約為：1小時*
 
-简介
+簡介
 ++++++++
 
-传统架构中，文件共享存储往往容易成为IT部门的另一个孤岛，从而遇到与SAN存储中使用过程中相同的扩展问题和缺乏持续创新的困扰，并带来了很多不必要的复杂性。 Nutanix认为企业云中没有孤岛存在的空间。通过将文件存储演变为一种应用程序，并运行在经过验证的HCI核心之上，Nutanix Files可通过一键式管理，同时为用户提供高性能，可伸缩性和快速创新的文件共享存储服务。
+傳統架構中，檔案共享儲存往往容易成為IT部門的另一個孤島，從而遇到與SAN儲存中使用過程中相同的擴展問題和缺乏持續創新的困擾，並帶來了很多不必要的複雜性。 Nutanix認為企業雲中沒有孤島存在的空間。通過將檔儲存演變為一種應用程式，並運行在經過驗證的HCI核心之上，Nutanix Files可通過一鍵式管理，同時為用戶提供高性能，可伸縮性和快速創新的檔案共享儲存服務。
 
-**在本实验中，您将逐步完成Nutanix Files功能的部署，并练习如何管理SMB共享和NFS共享，以及如何进行配置扩展，并探索全新的文件功能。该实验还将提供有关部署，配置和用例中需要特别关注的注意事项。**
+**在本實作中，您將逐步完成Nutanix Files功能的部署，並練習如何管理SMB共用和NFS共用，以及如何進行配置擴展，並探索全新的檔案共享功能。該實作還將提供有關部署，配置和用例中需要特別關注的注意事項。**
 
 .. _deploying_files:
 
-实验前置条件
+實作前置條件
 +++++++++
-本实验需要使用在实验Windows_tools_vm章节中配置的应用程序。
+本實作需要使用在實作Windows_tools_vm章節中配置的應用程式。
 
-如果在此实验之前还未尚未部署此VM，请在继续本练习之前，先根据该链接的步骤完成前置实验条件。
+如果在此實作之前還未尚未部署此VM，請在繼續本練習之前，先根據該連結的步驟完成前置實作條件。
 
-部署Nutanix Files服务
+部署Nutanix Files服務
 ++++++++++++
 
-#. 在 **Prism > File Server** 菜单中, 点击 **+ File Server** 以打开 **New File Server Pre-Check** 对话框.
+#. 在 **Prism > File Server** 菜單中, 點擊 **+ File Server** 以打開 **New File Server Pre-Check** 對話方塊.
 
    .. figure:: images/1.png
 
-    为了节省时间，Files 3.5.2应用程序包已经上载到您的集群中，如果您发现没有此程序包，请到my.nutanix.com中进行下载。程序包二进制文件可以直接通过Prism下载，也可以在Nutanix support portal中进行下载并手动上传。
+    為了節省時間，Files 3.5.2應用套裝程式已經上載到您的集群中，如果您發現沒有此套裝程式，請到my.nutanix.com中進行下載。套裝程式二進位檔案可以直接通過Prism下載，也可以在Nutanix support portal中進行下載並手動上傳。
 
    .. figure:: images/2.png
 
-    此外，超融合群集的 **Data Services** IP地址已经预先配置为（* 10.XX.YY.38 *）。在Nutanix Files群集中，存储需要通过iSCSI协议，通过Volume Group 提供给文件虚拟机，因此依赖于此数据服务IP。
+    此外，超融合群集的 **Data Services** IP位址已經預先配置為（* 10.XX.YY.38 *）。在Nutanix Files群集中，儲存需要通過iSCSI協定，通過Volume Group 提供給檔虛擬機器，因此依賴於此資料服務IP。
    .. 注::
 
-     如果是在您自己的环境中而不是预先准备的HPOC环境中进行部署，则可以通过以下方式轻松配置您自己环境的数据服务IP：选择> fa：`gear` **>Cluster Details** ，指定 
-**iSCSI Data Services IP** ，然后单击 **Save** 。当前，数据服务IP要求必须与CVM在同一子网中。
+     如果是在您自己的環境中而不是預先準備的HPOC環境中進行部署，則可以通過以下方式輕鬆配置您自己環境的資料服務IP：選擇> fa：`gear` **>Cluster Details** ，指定 
+**iSCSI Data Services IP** ，然後按一下 **Save** 。當前，資料服務IP要求必須與CVM在同一子網中。
 
-   最后，文件将确保在群集上至少配置了1个网络。建议至少配置2个分段网络，以便将客户端网络和存储网络进行隔离。
+   最後，Files將確保在群集上至少配置了1個網路。建議至少配置2個分段網路，以便將用戶端網路和儲存網路進行隔離。
 
-#. 点击 **Continue**.
+#. 點擊 **Continue**.
 
    .. figure:: images/3.png
 
-#. 填写以下字段:
+#. 填寫以下欄位:
 
    - **Name** - *Intials*-Files (e.g. XYZ-Files)
    - **Domain** - ntnxlab.local
@@ -54,103 +54,103 @@ Files: 部署Nutanix Files功能
 
    .. 注::
 
-     单击 **Custom Configuration** 将允许您根据用户数和吞吐量目标更改文件VM的放大和缩小尺寸. 它还允许手动调整“Files”群集的大小。
+     按一下 **Custom Configuration** 將允許您根據使用者數和輸送量目標更改檔VM的放大和縮小尺寸. 它還允許手動調整“Files”群集的大小。
 
      .. figure:: images/5.png
 
-#. 点击 **Next**.
+#. 點擊 **Next**.
 
-#. 为 **Client Network** 选择 **Secondary - Managed** VLAN .
+#. 為 **Client Network** 選擇 **Secondary - Managed** VLAN .
 
-   每个Files VM将在客户端网络上使用一个IP
-
-   .. 注::
-
-    在HPOC环境中，如果需要采用不同的客户端网络和存储网络，则将客户端网络分配至第二VLAN至关重要
-
-    在生产环境中，通常会使用专用虚拟网络来部署Files，以隔离用户客户端流程和存储通讯流量。当使用两个隔离网络时，根据设计，Files将禁止客户端访问存储网络，这意味着，分配给第一网络的所有VM将无法访问共享。
-
+   每個Files VM將在用戶端網路上使用一個IP
 
    .. 注::
 
-     由于本实验使用通过AHV管理的网络，因此不需要配置单个IP。但在ESXi环境中，或在使用不受管理的AHV网络时，您将需要手工指定网络详细信息和可用IP信息，如下所示
+    在HPOC環境中，如果需要採用不同的用戶端網路和儲存網路，則將用戶端網路分配至第二VLAN至關重要
+
+    在生產環境中，通常會使用專用虛擬網路來部署Files，以隔離使用者用戶端流程和儲存通訊流量。當使用兩個隔離網路時，根據設計，Files將禁止用戶端訪問儲存網路，這意味著，分配給第一網路的所有VM將無法訪問共用。
+
+
+   .. 注::
+
+     由於本實作使用通過AHV管理的網路，因此不需要配置單個IP。但在ESXi環境中，或在使用不受管理的AHV網路時，您將需要手工指定網路詳細資訊和可用IP資訊，如下所示
 
      .. figure:: images/6.png
 
-#. 将群集的 **Domain Controller** IP（位于：ref：`stagingdetails`中）指定为“ DNS解析器IP”（例如10.XX.YY.40）。保留默认（群集）NTP服务器
+#. 將群集的 **Domain Controller** IP（位於：ref：`stagingdetails`中）指定為“ DNS解析器IP”（例如10.XX.YY.40）。保留預設（群集）NTP伺服器
    .. raw:: html
 
-     <strong><font color="red">为使Files群集成功找到并加入NTNXLAB.local域，将DNS解析器IP设置为您的集群的域控制器的虚拟机IP是至关重要的。默认情况下，此字段设置为Nutanix群集配置的主DNS服务器IP，此值不正确，将不起作用。</font></strong>
+     <strong><font color="red">為使Files群集成功找到並加入NTNXLAB.local域，將DNS解析器IP設置為您的集群的網域控制站的虛擬機器IP是至關重要的。預設情況下，此欄位設置為Nutanix群集配置的主DNS伺服器IP，此值不正確，將不起作用。</font></strong>
 
    .. figure:: images/7.png
 
-#. 点击 **Next**.
+#. 點擊 **Next**.
 
-#. 选择存储网络的 **Primary - Managed** VLAN.
+#. 選擇儲存網路的 **Primary - Managed** VLAN.
 
    Each Files VM will consume a single IP on the storage network, plus 1 additional IP for the cluster.
-   每个文件VM将在存储网络上消耗一个IP地址，同时整个群集还需要额外分配1个IP地址。
+   每個Files VM將在儲存網路上消耗一個IP位址，同時整個群集還需要額外分配1個IP位址。
 
    .. figure:: images/8.png
 
-#. 点击 **Next**.
+#. 點擊 **Next**.
 
-#. 填写以下字段:
+#. 填寫以下欄位:
 
-   - 选择 **Use SMB Protocol**
-   - **用户名** - Administrator@ntnxlab.local
-   - **密码** - nutanix/4u
-   - 选择 **Make this user a File Server admin**
-   - 选择 **Use NFS Protocol**
-   - **User Management and Authentication** - 选择非托管模式(unmanaged)
+   - 選擇 **Use SMB Protocol**
+   - **用戶名** - Administrator@ntnxlab.local
+   - **密碼** - nutanix/4u
+   - 選擇 **Make this user a File Server admin**
+   - 選擇 **Use NFS Protocol**
+   - **User Management and Authentication** - 選擇非託管模式(unmanaged)
 
    .. figure:: images/9.png
 
-   .. 注:: 在非托管模式下，仅通过UID / GID来标识用户，在Files 3.5版本中，Files可同时支持NFSv3 和 NFSv4
+   .. 注:: 在非託管模式下，僅通過UID / GID來標識使用者，在Files 3.5版本中，Files可同時支援NFSv3 和 NFSv4
 
-#. 点击 **Next**.
+#. 點擊 **Next**.
 
-   默认情况下，Files将自动创建一个“保护域”，并为Files群集的每天创建Daily的快照并保留最后两个快照。在部署完成后，可以修改快照日程计划并定义远程复制站点。
+   預設情況下，Files將自動創建一個“保護域”，並為Files群集的每天創建Daily的快照並保留最後兩個快照。在部署完成後，可以修改快照日程計畫並定義遠端複製網站。
 
    .. figure:: images/10.png
 
-#. 点击 **Create** 以开始文件部署.
+#. 點擊 **Create** 以開始Files部署.
 
-#. 在 **Prism > Tasks** 中监视部署进度
+#. 在 **Prism > Tasks** 中監視部署進度
 
-   部署大约需要10分钟.
+   部署大約需要10分鐘.
 
    .. figure:: images/11.png
 
    .. 注::
 
-   如果您收到有关DNS记录验证失败的警告，可以放心地忽略。共享群集没有使用与文件群集相同的DNS服务器，因此无法解析在部署Files服务时创建的DNS条目。
+   如果您收到有關DNS記錄驗證失敗的警告，可以放心地忽略。共用群集沒有使用與檔案共享群集相同的DNS伺服器，因此無法解析在部署Files服務時創建的DNS條目。
 
-#. 在等待Files 服务器部署过程中，如果您尚未部署Windows Tools 虚拟机，则可以在此时间进行
+#. 在等待Files 伺服器部署過程中，如果您尚未部署Windows Tools 虛擬機器，則可以在此時間進行
 
-#. 通过RDP协议或远程控制台连接到Windows Tools VM
+#. 通過RDP協議或遠端控制台連接到Windows Tools VM
 
-#. 将用于文件分析的示例文件下载到工具VM：
+#. 將用於文件分析的示例文件下載到工具VM：
 
    - `https://peerresources.blob.core.windows.net/sample-data/SampleData_Small.zip <https://peerresources.blob.core.windows.net/sample-data/SampleData_Small.zip>`_
 
-#. 将文件分析json和qcow文件下载到Tools VM
+#. 將檔案共用分析json和qcow檔下載到Tools VM
 
    - `nutanix-file-analytics-2.0.0-metadata.json <http://10.42.194.11/workshop_staging/fileanalytics-2.0.0.json>`_
    - `nutanix-file-analytics-2.0.0.qcow2 <http://10.42.194.11/workshop_staging/nutanix-file_analytics-el7.6-release-2.0.0.qcow2>`_
 
-#. 完成后，返回到“ Prism> File Server”，然后选择*Initials*\ **-Files** 服务器，然后单击 **Protect**。
+#. 完成後，返回到“ Prism> File Server”，然後選擇*Initials*\ **-Files** 伺服器，然後按一下 **Protect**。
 
    .. figure:: images/12.png
 
-#. 观察默认的自助服务还原的日程计划，此功能同时控制Windows以前版本功能的快照计划。支持Windwos先前版本的功能，允许最终用户无需联系存储或备份管理员，就可以实现对文件的恢复和回滚操作。请注意，这些本地快照不能保护在本地集群出故障时，文件服务器集群不受影响，并且可以支持整个文件系统的数据可以直接复制到远程站点。点击 **Close** 。
+#. 觀察預設的自助服務還原的日程計畫，此功能同時控制Windows以前版本功能的快照計畫。支援Windwos先前版本的功能，允許最終使用者無需聯繫儲存或備份管理員，就可以實現對檔的恢復和回滾操作。請注意，這些本地快照不能保護在本地集群出故障時，檔案伺服器集群不受影響，並且可以支援整個檔案系統的資料可以直接複製到遠端網站。點擊 **Close** 。
    .. figure:: images/13.png
 
-概要总结
+概要總結
 +++++++++
 
-关于 **Nutanix Files** ，您应该了解哪些关键知识？
+關於 **Nutanix Files** ，您應該瞭解哪些關鍵知識？
 
--Files 可以快速部署在现有Nutanix群集之上，从而为用户共享，主目录，部门共享，应用程序和任何其他通用文件存储需求提供SMB和NFS存储。
--Files不是单点解决方案。VM，文件，块和对象存储都可以在同一平台上使用相同的管理工具来交付，从而降低了复杂性和管理孤岛
+-Files 可以快速部署在現有Nutanix群集之上，從而為使用者共用，主目錄，部門共用，應用程式和任何其他通用檔案儲存需求提供SMB和NFS儲存。
+-Files不是單點解決方案。VM，檔案，區塊和物件儲存都可以在同一平臺上使用相同的管理工具來交付，從而降低了複雜性和管理孤島
 

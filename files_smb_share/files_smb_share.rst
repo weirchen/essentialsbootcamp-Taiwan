@@ -1,23 +1,23 @@
 .. _files_smb_share:
 
 ----------------------------
-Files: 创建 SMB Share
+Files: 創建 SMB Share
 ----------------------------
 
-简介
+簡介
 ++++++++
 
-在本练习中，您将创建和测试SMB Share，用于支持主目录，用户配置文件以及其他非结构化文件数据，例如Windows客户端通常访问的部门Share。
+在本練習中，您將創建和測試SMB Share，用於支援主目錄，使用者設定檔以及其他非結構化檔案資料，例如Windows用戶端通常存取的部門Share。
 
 使用 SMB Shares
 ++++++++++++++++
 
-创建 Share
+創建 Share
 ..................
 
-#. 在 **Prism > File Server**, 单击 **+ Share/Export**.
+#. 在 **Prism > File Server**, 按一下 **+ Share/Export**.
 
-#. 填写以下字段：
+#. 填寫以下欄位：
 
    - **Name** - Marketing
    - **Description (Optional)** - Departmental share for marketing team
@@ -28,90 +28,90 @@ Files: 创建 SMB Share
 
    .. figure:: images/14.png
 
-#. 单击 **Next**.
+#. 按一下 **Next**.
 
-#. 选择 **Enable Access Based Enumeration** 和 **Self Service Restore**.
+#. 選擇 **Enable Access Based Enumeration** 和 **Self Service Restore**.
 
    .. figure:: images/15.png
 
-   在创建部门Share时，应将其创建为 **Standard** Share。 这意味Share中的所有顶级目录和文件以及与Share的连接均由单个文件VM提供。
+   在創建部門Share時，應將其創建為 **Standard** Share。 這意味Share中的所有根目錄和檔案以及與Share的連接均由單個Files VM提供。
 
-   **Distributed** Share适用于home主目录，用户配置文件和应用程序文件夹。 这种类型的Share在所有文件VM上分布顶级目录，并在文件群集内的所有文件VM之间平衡连接的负载。
-   **Access Based Enumeration (ABE)** 确保只有给定用户具有读取权限的文件和文件夹对该用户可见。 Windows文件Share通常启用此功能。
+   **Distributed** Share適用於home主目錄，使用者設定檔和應用程式檔案夾。 這種類型的Share在所有Files VM上分佈根目錄，並在檔案共用群集內的所有Files VM之間平衡連接的負載。
+   **Access Based Enumeration (ABE)** 確保只有給定用戶具有讀取許可權的檔和資料夾對該用戶可見。 Windows共用目錄通常啟用此功能。
 
-   **Self Service Restore** 允许用户利用Windows先前版本轻松地将单个文件还原到基于Nutanix快照的先前版本。
+   **Self Service Restore** 允許用戶利用Windows先前版本輕鬆地將單個檔案還原到基於Nutanix快照的先前版本。
 
-#. 单击 **Next**.
+#. 按一下 **Next**.
 
-#. 查看 **Summary** 并单击 **Create**.
+#. 查看 **Summary** 並按一下 **Create**.
 
    .. figure:: images/16.png
 
-验证 Share
+驗證 Share
 .................
 
-#. 通过RDP或控制台连接 *Initials*\ **-ToolsVM**。
+#. 通過RDP或控制台連接 *Initials*\ **-ToolsVM**。
 
    .. note::
 
-     ToolsVM已加入 **NTNXLAB.local** 域。 您可以使用任何加入域的VM来完成以下步骤。
+     ToolsVM已加入 **NTNXLAB.local** 網域。 您可以使用任何加入網域的VM來完成以下步驟。
 
-#. 在 **File Explorer**打开 ``\\<Intials>-Files.ntnxlab.local\``。
+#. 在 **File Explorer**打開 ``\\<Intials>-Files.ntnxlab.local\``。
 
    .. figure:: images/17.png
 
-#. 通过将上一步中下载的SampleData_Small.zip文件解压缩到Share中，以测试对Marketing Share的访问。
+#. 通過將上一步中下載的SampleData_Small.zip檔解壓縮到Share中，以測試對Marketing Share的存取。
 
    .. figure:: images/18.png
 
-    - **NTNXLAB\\Administrator** 在文件群集部署期间，该用户被指定为文件管理员，默认情况下授予该用户对所有Share的读/写访问权限。
-    - 管理其他用户的访问权限与任何其他SMB Share相同。
+    - **NTNXLAB\\Administrator** 在檔案共用群集部署期間，該用戶被指定為檔管理員，預設情況下授予該使用者對所有Share的讀/寫存取權限。
+    - 管理其他用戶的存取權限與任何其他SMB Share相同。
 
-#. 右击 **Marketing > Properties**.
+#. 右擊 **Marketing > Properties**.
 
-#. 选择 **Security** 选项卡并点击 **Advanced**.
+#. 選擇 **Security** 選項卡並點擊 **Advanced**.
 
    .. figure:: images/19.png
 
-#. 选择 **Users (**\ *Initials*\ **-Files\\Users)** 并单击 **Remove**。
+#. 選擇 **Users (**\ *Initials*\ **-Files\\Users)** 並按一下 **Remove**。
 
-#. 单击 **Add**.
+#. 按一下 **Add**.
 
-#. 单击 **Select a principal** 在 **Object Name** 字段填写 **Everyone** 。 单击 **OK**。
+#. 按一下 **Select a principal** 在 **Object Name** 欄位填寫 **Everyone** 。 按一下 **OK**。
 
    .. figure:: images/20.png
 
-#. 填写以下字段，然后单击 **OK**:
+#. 填寫以下欄位，然後按一下 **OK**:
 
    - **Type** - Allow
    - **Applies to** - This folder only
-   - 选择 **Read & execute**
-   - 选择 **List folder contents**
-   - 选择 **Read**
-   - 选择 **Write**
+   - 選擇 **Read & execute**
+   - 選擇 **List folder contents**
+   - 選擇 **Read**
+   - 選擇 **Write**
 
    .. figure:: images/21.png
 
-#. 单击 **OK > OK > OK** 保存权限更改。
+#. 按一下 **OK > OK > OK** 保存許可權更改。
 
-   现在，所有用户都可以在Marketing Share中创建文件夹和文件。
+   現在，所有用戶都可以在Marketing Share中創建資料夾和檔案。
 
-    许多人利用share来利用配额以确保公平使用资源是很常见的。 通过文件，可以为Active Directory内的单个用户或特定的Active Directory安全组按份额设置软配额或硬配额。
+    許多人利用share來利用配額以確保公平使用資源是很常見的。 通過Files，可以為Active Directory內的單個用戶或特定的Active Directory安全性群組按份額設置軟配額或硬配額。
 
-#. 在 **Prism > File Server > Share > Marketing**, 单击 **+ Add Quota Policy**.
+#. 在 **Prism > File Server > Share > Marketing**, 按一下 **+ Add Quota Policy**.
 
-#. 填写以下字段，然后单击 **Save**:
+#. 填寫以下欄位，然後按一下 **Save**:
 
-   - 选择 **Group**
+   - 選擇 **Group**
    - **User or Group** - SSP Developers
    - **Quota** - 10 GiB
    - **Enforcement Type** - Hard Limit
 
    .. figure:: images/22.png
 
-#. 单击 **Save**.
+#. 按一下 **Save**.
 
-#. 在仍选择“市场份额”的情况下，查看 **Share Details**，**Usage** 和 **Performance** 选项卡以了解每个share的可用情况，包括文件和连接的数量，一段时间内的存储利用率 ，延迟，吞吐量和IOPS。
+#. 在仍選擇“Marketing”共用目錄的情況下，查看 **Share Details**，**Usage** 和 **Performance** 選項卡以瞭解每個share的可用情況，包括檔案和連接的數量，一段時間內的儲存利用率 ，延遲，輸送量和IOPS。
 
 
    .. figure:: images/23.png

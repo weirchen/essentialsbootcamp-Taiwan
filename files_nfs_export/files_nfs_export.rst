@@ -1,23 +1,23 @@
 .. _files_nfs_export:
 
 ------------------------
-Files: 创建 NFS Export
+Files: 創建 NFS Export
 ------------------------
 
-简介
+簡介
 ++++++++
 
-在本练习中，您将创建和测试NFSv4导出，该导出用于支持集群应用程序，存储应用程序数据（例如日志记录）或存储Linux客户端通常访问的其他非结构化文件数据。
+在本練習中，您將創建和測試NFSv4 Export，該Export用於支援集群應用程式，儲存應用程式資料（例如日誌記錄）或儲存Linux用戶端通常存取的其他非結構化檔資料。
 
 使用 NFS Exports
 +++++++++++++++++
 
-创建Export
+創建Export
 ...................
 
-#. 在 **Prism > File Server**, 单击 **+ Share/Export**.
+#. 在 **Prism > File Server**, 按一下 **+ Share/Export**.
 
-#. 填写以下字段：
+#. 填寫以下欄位：
 
    - **Name** - logs
    - **Description (Optional)** - File share for system logs
@@ -28,35 +28,35 @@ Files: 创建 NFS Export
 
    .. figure:: images/24.png
 
-#. 单击 **Next**.
+#. 按一下 **Next**.
 
-#. 填写以下字段：
+#. 填寫以下欄位：
 
-   - 选择 **Enable Self Service Restore**
+   - 選擇 **Enable Self Service Restore**
       - These snapshots appear as a .snapshot directory for NFS clients.
    - **Authentication** - System
    - **Default Access (For All Clients)** - No Access
-   - 选择 **+ Add exceptions**
+   - 選擇 **+ Add exceptions**
    - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\ .* (e.g. 10.38.1.\*)
 
    .. figure:: images/25.png
 
-   默认情况下，NFS导出将允许对安装exports的任何主机进行读/写访问，但是可以将其限制为特定的IP或IP范围。
+   預設情況下，NFS Export將允許對安裝exports的任何主機進行讀/寫存取，但是可以將其限制為特定的IP或IP範圍。
 
-#. 单击 **Next**.
+#. 按一下 **Next**.
 
-#. 阅读 **Summary** 并单击 **Create**.
+#. 閱讀 **Summary** 並按一下 **Create**.
 
-测试 Export
+測試 Export
 ..................
 
-首先，您将提供一个CentOS VM用作Files exprot的客户端。
+首先，您將提供一個CentOS VM用作Files exprot的用戶端。
 
-.. note:: 如果已在另一个实验部署 :ref:`linux_tools_vm` ，则可以将此VM用作NFS客户端。
+.. note:: 如果已在另一個實作部署 :ref:`linux_tools_vm` ，則可以將此VM用作NFS用戶端。
 
-#. 在 **Prism > VM > Table**, 点击 **+ Create VM**.
+#. 在 **Prism > VM > Table**, 點擊 **+ Create VM**.
 
-#. 填写以下字段:
+#. 填寫以下欄位:
 
    - **Name** - *Initials*\ -NFS-Client
    - **Description** - CentOS VM for testing Files NFS export
@@ -71,16 +71,16 @@ Files: 创建 NFS Export
       - **VLAN Name** - Primary
       - Select **Add**
 
-#. 点击 **Save**.
+#. 點擊 **Save**.
 
-#. 选择 *Initials*\ **-NFS-Client** VM 并单击 **Power on**.
+#. 選擇 *Initials*\ **-NFS-Client** VM 並按一下 **Power on**.
 
-#. 在Prism中记下VM的IP地址，并使用以下凭据通过SSH连接：
+#. 在Prism中記下VM的IP位址，並使用以下憑據通過SSH連接：
 
    - **Username** - root
    - **Password** - nutanix/4u
 
-#. 执行以下命令：
+#. 執行以下命令：
 
      .. code-block:: bash
 
@@ -101,19 +101,19 @@ Files: 创建 NFS Export
        total 1
        drwxrwxrwx. 2 root root 2 Mar  9 18:53 logs
 
-#. 观察 **logs**目录已安装在 ``/filesmnt/logs``.
+#. 觀察 **logs**目錄已安裝在 ``/filesmnt/logs``.
 
-#. 重新启动VM，并观察到出口不再挂载。 要保持挂载，通过执行以下命令将其添加到``/etc/fstab``中：
+#. 重新啟動VM，並觀察到export不再掛載。 要保持掛載，通過執行以下命令將其添加到``/etc/fstab``中：
 
        echo 'Intials-Files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
 
-#. 以下命令将添加100个2MB的文件，其中填充了随机数据 ``/filesmnt/logs``:
+#. 以下命令將添加100個2MB的檔，其中填充了隨機資料 ``/filesmnt/logs``:
 
      .. code-block:: bash
 
        mkdir /filesmnt/logs/host1
        for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/logs/host1/file$i; done
 
-#. 返回 **Prism > File Server > Share > logs** 监控性能和使用情况。
+#. 返回 **Prism > File Server > Share > logs** 監控效能和使用情況。
 
-  请注意，利用率数据每10分钟更新一次。
+  請注意，利用率資料每10分鐘更新一次。

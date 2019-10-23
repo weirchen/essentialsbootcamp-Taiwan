@@ -4,78 +4,78 @@
 Calm: Projects
 ------------
 
-简介
+簡介
 ++++++++
 
 .. note::
 
-  在继续练习之前阅读 :ref:`calm_basics` ，您需要熟悉Nutanix Calm中使用的UI和常用术语。
+  在繼續練習之前閱讀 :ref:`calm_basics` ，您需要熟悉Nutanix Calm中使用的UI和常用術語。
 
-  预计完成时间：**15 MINUTES**
+  預計完成時間：**15 MINUTES**
 
-在本练习中，您将配置一个包含在整个Bootcamp中创建的蓝图和应用程序Project。
+在本練習中，您將配置一個包含在整個Bootcamp中創建的藍圖和應用程式Project。
 
-生成一个Project
+生成一個Project
 ++++++++++++++++++
 
-Projects 是将Calm与Nutanix的内置自助服务门户（SSP）功能集成的逻辑结构，允许管理员将基础结构资源以及Active Directory用户/组的角色/权限分配给特定的蓝图和应用程序。
-#. 在Calm UI界面内, 从边栏选择|proj-icon| **Projects**。
+Projects 是將Calm與Nutanix的內置自助服務入口網站（SSP）功能整合的邏輯結構，允許管理員將基礎結構資源以及Active Directory使用者/組的角色/許可權分配給特定的藍圖和應用程式。
+#. 在Calm UI介面內, 從邊欄選擇|proj-icon| **Projects**。
 
    .. figure:: images/510projects1.png
 
-#. 点击 **+ Create Project**
+#. 點擊 **+ Create Project**
 
-#. 填写以下字段：
+#. 填寫以下欄位：
 
    - **Project Name** - *initials*-Calm
    - **Description** - *initials*-Calm
 
-#. 在 **Users, Groups, and Roles**下面, 点击 **+ User**.
+#. 在 **Users, Groups, and Roles**下面, 點擊 **+ User**.
 
-#. 填写以下字段，然后单击 **Save**:
+#. 填寫以下欄位，然後按一下 **Save**:
 
    - **Name** - SSP Admins
    - **Role** - Project Admin
 
-#. 单击 **+ User**, 填写以下字段，然后单击 **Save**:
+#. 按一下 **+ User**, 填寫以下欄位，然後按一下 **Save**:
 
    - **Name** - SSP Developers
    - **Role** - Developer
 
-#. 单击 **+ User**, 填写以下字段，然后单击 **Save**:
+#. 按一下 **+ User**, 填寫以下欄位，然後按一下 **Save**:
 
    - **Name** - SSP Power Users
    - **Role** - Consumer
 
-#. 单击 **+ User**, 填写以下字段，然后单击 **Save**:
+#. 按一下 **+ User**, 填寫以下欄位，然後按一下 **Save**:
 
    - **Name** - SSP Basic Users
    - **Role** - Operator
 
    .. figure:: images/projects_name_users.png
 
-#. 在 **Infrastructure**下, 单击蓝色的 **Select Provider** 按钮, 之后是 **Nutanix**.
+#. 在 **Infrastructure**下, 按一下藍色的 **Select Provider** 按鈕, 之後是 **Nutanix**.
 
-#. 在出现的框中，单击白色 **Select Clusters & Subnets** 按钮, 并在弹出窗口中，选择您的AHV群集。 选择集群后，选择 **Primary** 网络，如果有的话，再选择 **Secondary**网络，然后单击 **Confirm**.
+#. 在出現的框中，按一下白色 **Select Clusters & Subnets** 按鈕, 並在快顯視窗中，選擇您的AHV群集。 選擇集群後，選擇 **Primary** 網路，如果有的話，再選擇 **Secondary**網路，然後按一下 **Confirm**.
 
    .. figure:: images/projects_cluster_subnet_selection.png
 
-#. 在 **Selected Subnets** 表内, 为 **Primary**网络选择 :fa:`star`  使其成为 **Calm** project里虚拟机中的默认虚拟网络 
+#. 在 **Selected Subnets** 表內, 為 **Primary**網路選擇 :fa:`star`  使其成為 **Calm** project裡虛擬機器中的預設虛擬網路 
 
    .. figure:: images/projects_infrastructure.png
 
-#. 单击 **Save**.
+#. 按一下 **Save**.
 
 .. note::
 
-  单击 `here <https://portal.nutanix.com/#/page/docs/details?targetId=Nutanix-Calm-Admin-Operations-Guide-v56:nuc-roles-responsibility-matrix-c.html>`_ 查看默认SSP角色和相关权限的完整列表。
+  按一下 `here <https://portal.nutanix.com/#/page/docs/details?targetId=Nutanix-Calm-Admin-Operations-Guide-v56:nuc-roles-responsibility-matrix-c.html>`_ 查看默認SSP角色和相關許可權的完整列表。
 
-概要总结
+概要總結
 +++++++++
 
--Nutanix Calm是Nutanix堆栈的完全集成组件。 在Scale Out Prism Central部署中易于启用，高度可用，并且利用无中断的一键式升级来获得新功能和修复。
+-Nutanix Calm是Nutanix企業雲的完全整合元件。 在Scale Out Prism Central部署中易於啟用，高度可用，並且利用無中斷的一鍵式升級來獲得新功能和修復。
 
--通过使用分配给不同群集和用户的不同项目，管理员可以确保每次都以正确的方式部署工作负载。 例如，开发人员可以是开发/测试项目的项目管理员，因此他们可以完全控制部署到其开发集群或云中，同时具有对生产项目的只读访问权限，从而使他们可以访问日志，但无权 改变生产工作量。
+-通過使用分配給不同群集和用戶的不同專案，管理員可以確保每次都以正確的方式部署工作負載。 例如，開發人員可以是開發/測試專案的專案管理員，因此他們可以完全控制部署到其開發集群或雲中，同時具有對生產項目的唯讀存取權限，從而使他們可以存取日誌，但無權 改變生產工作量。
 
 .. |proj-icon| image:: ../images/projects_icon.png
 .. |mktmgr-icon| image:: ../images/marketplacemanager_icon.png
